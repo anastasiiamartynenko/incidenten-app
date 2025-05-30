@@ -1,0 +1,17 @@
+D:\c#\IncidentenApp\Incidenten.Infrastructures\bin\Debug\net9.0\Incidenten.Infrastructures.deps.json
+D:\c#\IncidentenApp\Incidenten.Infrastructures\bin\Debug\net9.0\Incidenten.Infrastructures.dll
+D:\c#\IncidentenApp\Incidenten.Infrastructures\bin\Debug\net9.0\Incidenten.Infrastructures.pdb
+D:\c#\IncidentenApp\Incidenten.Infrastructures\bin\Debug\net9.0\Incidenten.Domain.dll
+D:\c#\IncidentenApp\Incidenten.Infrastructures\bin\Debug\net9.0\Incidenten.Domain.pdb
+D:\c#\IncidentenApp\Incidenten.Infrastructures\obj\Debug\net9.0\Incidenten.Infrastructures.csproj.AssemblyReference.cache
+D:\c#\IncidentenApp\Incidenten.Infrastructures\obj\Debug\net9.0\Incidenten.Infrastructures.GeneratedMSBuildEditorConfig.editorconfig
+D:\c#\IncidentenApp\Incidenten.Infrastructures\obj\Debug\net9.0\Incidenten.Infrastructures.AssemblyInfoInputs.cache
+D:\c#\IncidentenApp\Incidenten.Infrastructures\obj\Debug\net9.0\Incidenten.Infrastructures.AssemblyInfo.cs
+D:\c#\IncidentenApp\Incidenten.Infrastructures\obj\Debug\net9.0\Incidenten.Infrastructures.csproj.CoreCompileInputs.cache
+D:\c#\IncidentenApp\Incidenten.Infrastructures\obj\Debug\net9.0\Incident.66FDCE80.Up2Date
+D:\c#\IncidentenApp\Incidenten.Infrastructures\obj\Debug\net9.0\Incidenten.Infrastructures.dll
+D:\c#\IncidentenApp\Incidenten.Infrastructures\obj\Debug\net9.0\refint\Incidenten.Infrastructures.dll
+D:\c#\IncidentenApp\Incidenten.Infrastructures\obj\Debug\net9.0\Incidenten.Infrastructures.pdb
+D:\c#\IncidentenApp\Incidenten.Infrastructures\obj\Debug\net9.0\ref\Incidenten.Infrastructures.dll
+D:\c#\IncidentenApp\Incidenten.Infrastructures\bin\Debug\net9.0\Incidenten.Infrastructures.runtimeconfig.json
+D:\c#\IncidentenApp\Incidenten.Infrastructures\obj\Debug\net9.0\Incidenten.Infrastructures.genruntimeconfig.cache

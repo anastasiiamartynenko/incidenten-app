@@ -1,0 +1,42 @@
+﻿@page "/test"
+@using Incidenten.Shared.Api
+@using Refit
+@inject ITestApi TestApi
+
+<MudPaper Class="p-4" Elevation="4">
+    <MudText Typo="Typo.h5">Send Test String to API</MudText>
+
+    <MudTextField Label="Enter test string"
+                  @bind-Value="testInput"
+                  Variant="Variant.Outlined"
+                  Class="my-2" />
+
+    <MudButton Color="Color.Primary" OnClick="SendTest">
+        Send
+    </MudButton>
+
+    @if (!string.IsNullOrEmpty(apiResponse))
+    {
+        <MudAlert Severity="Severity.Success" Class="mt-3">
+            Response: @apiResponse
+        </MudAlert>
+    }
+</MudPaper>
+
+@code {
+    private string testInput = string.Empty;
+    private string apiResponse;
+
+    private async Task SendTest()
+    {
+        try
+        {
+            var response = await TestApi.SendTest(new TestRequest { testString = testInput });
+            apiResponse = response.Result;
+        }
+        catch (ApiException exception)
+        {
+            apiResponse = $"API error: {exception.Message}";
+        }
+    }
+}

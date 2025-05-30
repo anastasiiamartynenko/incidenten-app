@@ -1,0 +1,12 @@
+D:\c#\IncidentenApp\Incidenten.Shared\bin\Debug\net9.0\Incidenten.Shared.deps.json
+D:\c#\IncidentenApp\Incidenten.Shared\bin\Debug\net9.0\Incidenten.Shared.dll
+D:\c#\IncidentenApp\Incidenten.Shared\bin\Debug\net9.0\Incidenten.Shared.pdb
+D:\c#\IncidentenApp\Incidenten.Shared\obj\Debug\net9.0\Incidenten.Shared.GeneratedMSBuildEditorConfig.editorconfig
+D:\c#\IncidentenApp\Incidenten.Shared\obj\Debug\net9.0\Incidenten.Shared.AssemblyInfoInputs.cache
+D:\c#\IncidentenApp\Incidenten.Shared\obj\Debug\net9.0\Incidenten.Shared.AssemblyInfo.cs
+D:\c#\IncidentenApp\Incidenten.Shared\obj\Debug\net9.0\Incidenten.Shared.csproj.CoreCompileInputs.cache
+D:\c#\IncidentenApp\Incidenten.Shared\obj\Debug\net9.0\Incidenten.Shared.dll
+D:\c#\IncidentenApp\Incidenten.Shared\obj\Debug\net9.0\refint\Incidenten.Shared.dll
+D:\c#\IncidentenApp\Incidenten.Shared\obj\Debug\net9.0\Incidenten.Shared.pdb
+D:\c#\IncidentenApp\Incidenten.Shared\obj\Debug\net9.0\ref\Incidenten.Shared.dll
+D:\c#\IncidentenApp\Incidenten.Shared\obj\Debug\net9.0\Incidenten.Shared.csproj.AssemblyReference.cache

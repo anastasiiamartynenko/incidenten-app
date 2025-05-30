@@ -1,0 +1,11 @@
+D:\c#\IncidentenApp\Incidenten.Domain\bin\Debug\net9.0\Incidenten.Domain.deps.json
+D:\c#\IncidentenApp\Incidenten.Domain\bin\Debug\net9.0\Incidenten.Domain.dll
+D:\c#\IncidentenApp\Incidenten.Domain\bin\Debug\net9.0\Incidenten.Domain.pdb
+D:\c#\IncidentenApp\Incidenten.Domain\obj\Debug\net9.0\Incidenten.Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\c#\IncidentenApp\Incidenten.Domain\obj\Debug\net9.0\Incidenten.Domain.AssemblyInfoInputs.cache
+D:\c#\IncidentenApp\Incidenten.Domain\obj\Debug\net9.0\Incidenten.Domain.AssemblyInfo.cs
+D:\c#\IncidentenApp\Incidenten.Domain\obj\Debug\net9.0\Incidenten.Domain.csproj.CoreCompileInputs.cache
+D:\c#\IncidentenApp\Incidenten.Domain\obj\Debug\net9.0\Incidenten.Domain.dll
+D:\c#\IncidentenApp\Incidenten.Domain\obj\Debug\net9.0\refint\Incidenten.Domain.dll
+D:\c#\IncidentenApp\Incidenten.Domain\obj\Debug\net9.0\Incidenten.Domain.pdb
+D:\c#\IncidentenApp\Incidenten.Domain\obj\Debug\net9.0\ref\Incidenten.Domain.dll
