@@ -33,6 +33,7 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Incidenten.Domain": "1.0.0",
           "Refit": "8.0.0"
         },
         "compile": {

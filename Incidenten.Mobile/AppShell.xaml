@@ -4,11 +4,16 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:Incidenten.Mobile"
+    xmlns:views="clr-namespace:Incidenten.Mobile.Views"
     Title="Incidenten.Mobile">
 
+    <!-- Home page -->
     <ShellContent
         Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
         Route="MainPage" />
-
+    <!-- <ShellContent  -->
+    <!--     Title="User" -->
+    <!--     ContentTemplate="{DataTemplate views:UserPage}" -->
+    <!--     Route="UserPage" /> -->
 </Shell>

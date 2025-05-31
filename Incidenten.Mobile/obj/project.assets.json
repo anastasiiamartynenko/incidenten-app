@@ -2461,10 +2461,21 @@
           }
         }
       },
+      "Incidenten.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        }
+      },
       "Incidenten.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Incidenten.Domain": "1.0.0",
           "Refit": "8.0.0"
         },
         "compile": {
@@ -4935,10 +4946,21 @@
           }
         }
       },
+      "Incidenten.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        }
+      },
       "Incidenten.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Incidenten.Domain": "1.0.0",
           "Refit": "8.0.0"
         },
         "compile": {
@@ -7409,10 +7431,21 @@
           }
         }
       },
+      "Incidenten.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        }
+      },
       "Incidenten.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Incidenten.Domain": "1.0.0",
           "Refit": "8.0.0"
         },
         "compile": {
@@ -9883,10 +9916,21 @@
           }
         }
       },
+      "Incidenten.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        }
+      },
       "Incidenten.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Incidenten.Domain": "1.0.0",
           "Refit": "8.0.0"
         },
         "compile": {
@@ -12357,10 +12401,21 @@
           }
         }
       },
+      "Incidenten.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        }
+      },
       "Incidenten.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Incidenten.Domain": "1.0.0",
           "Refit": "8.0.0"
         },
         "compile": {
@@ -14831,10 +14886,21 @@
           }
         }
       },
+      "Incidenten.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        }
+      },
       "Incidenten.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Incidenten.Domain": "1.0.0",
           "Refit": "8.0.0"
         },
         "compile": {
@@ -15387,10 +15453,21 @@
           }
         }
       },
+      "Incidenten.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        }
+      },
       "Incidenten.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Incidenten.Domain": "1.0.0",
           "Refit": "8.0.0"
         },
         "compile": {
@@ -15943,10 +16020,21 @@
           }
         }
       },
+      "Incidenten.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        }
+      },
       "Incidenten.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Incidenten.Domain": "1.0.0",
           "Refit": "8.0.0"
         },
         "compile": {
@@ -16499,10 +16587,21 @@
           }
         }
       },
+      "Incidenten.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        }
+      },
       "Incidenten.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Incidenten.Domain": "1.0.0",
           "Refit": "8.0.0"
         },
         "compile": {
@@ -17055,10 +17154,21 @@
           }
         }
       },
+      "Incidenten.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        }
+      },
       "Incidenten.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Incidenten.Domain": "1.0.0",
           "Refit": "8.0.0"
         },
         "compile": {
@@ -17611,10 +17721,21 @@
           }
         }
       },
+      "Incidenten.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        }
+      },
       "Incidenten.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Incidenten.Domain": "1.0.0",
           "Refit": "8.0.0"
         },
         "compile": {
@@ -18167,10 +18288,21 @@
           }
         }
       },
+      "Incidenten.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        }
+      },
       "Incidenten.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Incidenten.Domain": "1.0.0",
           "Refit": "8.0.0"
         },
         "compile": {
@@ -18723,10 +18855,21 @@
           }
         }
       },
+      "Incidenten.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        }
+      },
       "Incidenten.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Incidenten.Domain": "1.0.0",
           "Refit": "8.0.0"
         },
         "compile": {
@@ -19279,10 +19422,21 @@
           }
         }
       },
+      "Incidenten.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        }
+      },
       "Incidenten.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Incidenten.Domain": "1.0.0",
           "Refit": "8.0.0"
         },
         "compile": {
@@ -19835,10 +19989,21 @@
           }
         }
       },
+      "Incidenten.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        }
+      },
       "Incidenten.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Incidenten.Domain": "1.0.0",
           "Refit": "8.0.0"
         },
         "compile": {
@@ -20391,10 +20556,21 @@
           }
         }
       },
+      "Incidenten.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        }
+      },
       "Incidenten.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Incidenten.Domain": "1.0.0",
           "Refit": "8.0.0"
         },
         "compile": {
@@ -20947,10 +21123,21 @@
           }
         }
       },
+      "Incidenten.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        }
+      },
       "Incidenten.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Incidenten.Domain": "1.0.0",
           "Refit": "8.0.0"
         },
         "compile": {
@@ -21503,10 +21690,21 @@
           }
         }
       },
+      "Incidenten.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        }
+      },
       "Incidenten.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Incidenten.Domain": "1.0.0",
           "Refit": "8.0.0"
         },
         "compile": {
@@ -22269,10 +22467,21 @@
           }
         }
       },
+      "Incidenten.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        }
+      },
       "Incidenten.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Incidenten.Domain": "1.0.0",
           "Refit": "8.0.0"
         },
         "compile": {
@@ -22993,10 +23202,21 @@
           }
         }
       },
+      "Incidenten.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        }
+      },
       "Incidenten.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Incidenten.Domain": "1.0.0",
           "Refit": "8.0.0"
         },
         "compile": {
@@ -23717,10 +23937,21 @@
           }
         }
       },
+      "Incidenten.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        }
+      },
       "Incidenten.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Incidenten.Domain": "1.0.0",
           "Refit": "8.0.0"
         },
         "compile": {
@@ -24441,10 +24672,21 @@
           }
         }
       },
+      "Incidenten.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        }
+      },
       "Incidenten.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Incidenten.Domain": "1.0.0",
           "Refit": "8.0.0"
         },
         "compile": {
@@ -25165,10 +25407,21 @@
           }
         }
       },
+      "Incidenten.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        }
+      },
       "Incidenten.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Incidenten.Domain": "1.0.0",
           "Refit": "8.0.0"
         },
         "compile": {
@@ -25898,10 +26151,21 @@
           }
         }
       },
+      "Incidenten.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v9.0",
+        "compile": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Incidenten.Domain.dll": {}
+        }
+      },
       "Incidenten.Shared/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v9.0",
         "dependencies": {
+          "Incidenten.Domain": "1.0.0",
           "Refit": "8.0.0"
         },
         "compile": {
@@ -30102,6 +30366,11 @@
         "xamarin.kotlinx.serialization.core.jvm.1.7.3.2.nupkg.sha512",
         "xamarin.kotlinx.serialization.core.jvm.nuspec"
       ]
+    },
+    "Incidenten.Domain/1.0.0": {
+      "type": "project",
+      "path": "../Incidenten.Domain/Incidenten.Domain.csproj",
+      "msbuildProject": "../Incidenten.Domain/Incidenten.Domain.csproj"
     },
     "Incidenten.Shared/1.0.0": {
       "type": "project",

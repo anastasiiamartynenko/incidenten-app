@@ -15,3 +15,4 @@ D:\c#\IncidentenApp\Incidenten.Infrastructures\obj\Debug\net9.0\Incidenten.Infra
 D:\c#\IncidentenApp\Incidenten.Infrastructures\obj\Debug\net9.0\ref\Incidenten.Infrastructures.dll
 D:\c#\IncidentenApp\Incidenten.Infrastructures\bin\Debug\net9.0\Incidenten.Infrastructures.runtimeconfig.json
 D:\c#\IncidentenApp\Incidenten.Infrastructures\obj\Debug\net9.0\Incidenten.Infrastructures.genruntimeconfig.cache
+D:\c#\IncidentenApp\Incidenten.Infrastructures\obj\Debug\net9.0\Incidenten.Infrastructures.sourcelink.json

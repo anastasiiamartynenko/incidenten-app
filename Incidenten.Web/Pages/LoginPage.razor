@@ -1,0 +1,44 @@
+@page "/log-in"
+@inject IUserApi UserApi
+@inject AuthService AuthService
+@inject NavigationManager NavigationManager
+
+<MudPaper Class="pa-4">
+    <MudText>Log in</MudText>
+    
+    <MudTextField @bind-Value="_email" Label="Email" class="mt-3" />
+    <MudTextField @bind-Value="_password" Label="Password" InputType="InputType.Password" class="mt-3" />
+    
+    <MudText Color="Color.Error" class="mt-3">@_error</MudText>
+    <MudButton OnClick="LogIn" Variant="Variant.Filled" Color="Color.Primary" class="mt-3">Log in</MudButton>
+</MudPaper>
+
+@code {
+    string _email = "";
+    string _password = "";
+    string _error = string.Empty;
+
+    private async Task LogIn()
+    {
+        _error = string.Empty;
+
+        try
+        {
+            var response = await UserApi.LogIn(new LogInRequest
+            {
+                Email = _email,
+                Password = _password
+            });
+
+            if (response.Token != null)
+            {
+                await AuthService.SetTokenAsync(response.Token);
+                NavigationManager.NavigateTo("/user");
+            }
+        }
+        catch (Exception ex)
+        {
+            _error = "An error occurred: " + ex.Message;
+        }
+    }
+}

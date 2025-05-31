@@ -17,7 +17,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Incidenten.Mobile")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+c4a4d49417f9a32c12efbbc30c6ed49135ef675c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0+e5bd388ffdac426c84967c85ee8a14babad87cb9")]
 [assembly: System.Reflection.AssemblyProductAttribute("Incidenten.Mobile")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Incidenten.Mobile")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

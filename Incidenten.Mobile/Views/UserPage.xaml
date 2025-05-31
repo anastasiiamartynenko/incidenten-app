@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Incidenten.Mobile.Views.UserPage"
+             Title="My account">
+    <ContentPage.Content>
+        <VerticalStackLayout Padding="40" Spacing="15">
+            <Label Text="Welcome!" FontSize="20" />
+
+            <Label Text="{Binding FullName}" FontAttributes="Bold" />
+            <Label Text="{Binding Email}" />
+            <Label Text="{Binding Role}" />
+
+            <Button Text="Log Out" Clicked="OnLogoutClicked" />
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>

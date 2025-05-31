@@ -171,7 +171,11 @@
         "frameworks": {
           "net9.0": {
             "targetAlias": "net9.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\c#\\IncidentenApp\\Incidenten.Domain\\Incidenten.Domain.csproj": {
+                "projectPath": "D:\\c#\\IncidentenApp\\Incidenten.Domain\\Incidenten.Domain.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

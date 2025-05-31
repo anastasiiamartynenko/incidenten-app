@@ -1,21 +1,63 @@
 ﻿@inherits LayoutComponentBase
+@inject AuthService AuthService;
+@inject NavigationManager NavigationManager;
 
 <MudThemeProvider />
 <MudDialogProvider />
 <MudSnackbarProvider />
+<MudPopoverProvider />
+
 <MudLayout>
     <MudAppBar Color="Color.Primary">
+        @if (_isAuthenticated)
+        {
+            <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" OnClick="@ToggleDrawer"/>
+        }
+        <MudSpacer/>
         <MudText Typo="Typo.h6">Incidenten Web App</MudText>
+        <MudMenu Icon="@Icons.Material.Filled.Person" AriaLabel="Open user menu">
+            @if (_isAuthenticated)
+            {
+                <MudMenuItem Label="My account" OnClick="@(() => NavigationManager.NavigateTo("/user"))" />
+                <MudMenuItem Label="Log out" OnClick="@LogOut" />
+            }
+            else
+            {
+                <MudMenuItem Label="Log in" OnClick="@(() => NavigationManager.NavigateTo("/log-in"))" />
+                <MudMenuItem Label="Sign up" OnClick="@(() => NavigationManager.NavigateTo("/sign-up"))" />
+            }
+        </MudMenu>
     </MudAppBar>
 
-    <MudDrawer Open="true" ClipMode="DrawerClipMode.Always">
-        <MudNavMenu>
-            <MudNavLink Href="" Match="NavLinkMatch.All">Home</MudNavLink>
-            <MudNavLink Href="test">Test Page</MudNavLink>
-        </MudNavMenu>
-    </MudDrawer>
+    @if (_isAuthenticated)
+    {
+        <MudDrawer @bind-Open="@_open" ClipMode="DrawerClipMode.Always">
+            <NavMenu />
+        </MudDrawer>
+    }
 
     <MudMainContent>
         @Body
     </MudMainContent>
 </MudLayout>
+
+@code {
+    bool _isAuthenticated;
+    bool _open = false;
+
+    private void ToggleDrawer()
+    {
+        _open = !_open;
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        _isAuthenticated = await AuthService.IsAuthenticatedAsync();
+    }
+
+    async Task LogOut()
+    {
+        await AuthService.RemoveTokenAsync();
+        NavigationManager.NavigateTo("/log-in");
+    }
+}

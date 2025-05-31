@@ -1,7 +1,9 @@
+using Blazored.LocalStorage;
 using Incidenten.Shared.Api;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Incidenten.Web;
+using Incidenten.Web.Services;
 using MudBlazor.Services;
 using Newtonsoft.Json;
 using Refit;
@@ -24,8 +26,16 @@ var settings = new RefitSettings
     })
 };
 
+builder.Services.AddScoped<AuthService>();
+builder.Services.AddScoped<AuthTokenInjector>();
+
 builder.Services.AddRefitClient<ITestApi>(settings)
     .ConfigureHttpClient(client => client.BaseAddress = new Uri(apiBaseUrl));
+builder.Services.AddRefitClient<IUserApi>(settings)
+    .ConfigureHttpClient(client => client.BaseAddress = new Uri(apiBaseUrl))
+    .AddHttpMessageHandler<AuthTokenInjector>();
+
+builder.Services.AddBlazoredLocalStorage();
 
 // TODO: uncomment if needed. Most likely it is not.
 // builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(apiBaseUrl) });

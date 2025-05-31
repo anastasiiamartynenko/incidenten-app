@@ -128,3 +128,16 @@ D:\c#\IncidentenApp\Incidenten.API\bin\Debug\net9.0\ru\Microsoft.CodeAnalysis.Wo
 D:\c#\IncidentenApp\Incidenten.API\bin\Debug\net9.0\tr\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 D:\c#\IncidentenApp\Incidenten.API\bin\Debug\net9.0\zh-Hans\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
 D:\c#\IncidentenApp\Incidenten.API\bin\Debug\net9.0\zh-Hant\Microsoft.CodeAnalysis.Workspaces.MSBuild.BuildHost.resources.dll
+D:\c#\IncidentenApp\Incidenten.API\bin\Debug\net9.0\BCrypt.Net-Next.dll
+D:\c#\IncidentenApp\Incidenten.API\bin\Debug\net9.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\c#\IncidentenApp\Incidenten.API\bin\Debug\net9.0\Microsoft.IdentityModel.Abstractions.dll
+D:\c#\IncidentenApp\Incidenten.API\bin\Debug\net9.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\c#\IncidentenApp\Incidenten.API\bin\Debug\net9.0\Microsoft.IdentityModel.Logging.dll
+D:\c#\IncidentenApp\Incidenten.API\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.dll
+D:\c#\IncidentenApp\Incidenten.API\bin\Debug\net9.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\c#\IncidentenApp\Incidenten.API\bin\Debug\net9.0\Microsoft.IdentityModel.Tokens.dll
+D:\c#\IncidentenApp\Incidenten.API\bin\Debug\net9.0\Refit.dll
+D:\c#\IncidentenApp\Incidenten.API\bin\Debug\net9.0\System.IdentityModel.Tokens.Jwt.dll
+D:\c#\IncidentenApp\Incidenten.API\bin\Debug\net9.0\Incidenten.Shared.dll
+D:\c#\IncidentenApp\Incidenten.API\bin\Debug\net9.0\Incidenten.Shared.pdb
+D:\c#\IncidentenApp\Incidenten.API\obj\Debug\net9.0\Incidenten.API.sourcelink.json
