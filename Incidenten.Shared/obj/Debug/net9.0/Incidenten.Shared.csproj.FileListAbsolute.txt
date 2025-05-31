@@ -10,3 +10,7 @@ D:\c#\IncidentenApp\Incidenten.Shared\obj\Debug\net9.0\refint\Incidenten.Shared.
 D:\c#\IncidentenApp\Incidenten.Shared\obj\Debug\net9.0\Incidenten.Shared.pdb
 D:\c#\IncidentenApp\Incidenten.Shared\obj\Debug\net9.0\ref\Incidenten.Shared.dll
 D:\c#\IncidentenApp\Incidenten.Shared\obj\Debug\net9.0\Incidenten.Shared.csproj.AssemblyReference.cache
+D:\c#\IncidentenApp\Incidenten.Shared\obj\Debug\net9.0\Incidenten.Shared.sourcelink.json
+D:\c#\IncidentenApp\Incidenten.Shared\bin\Debug\net9.0\Incidenten.Domain.dll
+D:\c#\IncidentenApp\Incidenten.Shared\bin\Debug\net9.0\Incidenten.Domain.pdb
+D:\c#\IncidentenApp\Incidenten.Shared\obj\Debug\net9.0\Incident.44DC5986.Up2Date

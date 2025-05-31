@@ -1,0 +1,37 @@
+@page "/user"
+@inject IUserApi UserApi
+@inject AuthService AuthService;
+@inject NavigationManager NavigationManager
+
+<MudPaper Class="pa-4">
+    <MudText>My account</MudText>
+    
+    <MudText><strong>Email: </strong> @_user?.Email</MudText>
+    <MudText><strong>Full name: </strong> @_user?.FullName</MudText>
+    <MudText><strong>Role: </strong> @_user?.Role</MudText>
+    
+    <MudButton OnClick="LogOut" Color="Color.Error" Variant="Variant.Filled">Log out</MudButton>
+</MudPaper>
+
+@code {
+    User? _user;
+
+    private async Task LogOut()
+    {
+        await AuthService.RemoveTokenAsync();
+        NavigationManager.NavigateTo("/log-in");
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _user = await UserApi.GetMe();
+        }
+        catch
+        {
+            NavigationManager.NavigateTo("/log-in");
+        }
+    }
+
+}

@@ -2,18 +2,19 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Incidenten.Mobile.MainPage">
-
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            IconImageSource="person.png"
+            Text="Account"
+            Order="Primary"
+            Clicked="OnAccountClicked"/>
+    </ContentPage.ToolbarItems>
+    
     <ScrollView>
         <VerticalStackLayout
             Padding="30,0"
             Spacing="25">
-            <Label Text="Enter test string:" FontSize="20" />
-            <Entry x:Name="InputEntry" Placeholder="Type here..." />
-
-            <Button Text="Send to API" Clicked="OnSendClicked" />
-
-            <Label x:Name="ResultLabel" Text="Result will appear here" FontSize="16" />
-
+            <Label Text="Welcome!" FontSize="20" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

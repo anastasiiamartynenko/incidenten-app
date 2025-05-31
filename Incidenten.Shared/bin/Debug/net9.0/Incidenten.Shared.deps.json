@@ -8,6 +8,7 @@
     ".NETCoreApp,Version=v9.0": {
       "Incidenten.Shared/1.0.0": {
         "dependencies": {
+          "Incidenten.Domain": "1.0.0",
           "Refit": "8.0.0"
         },
         "runtime": {
@@ -19,6 +20,14 @@
           "lib/net8.0/Refit.dll": {
             "assemblyVersion": "8.0.0.0",
             "fileVersion": "8.0.0.1"
+          }
+        }
+      },
+      "Incidenten.Domain/1.0.0": {
+        "runtime": {
+          "Incidenten.Domain.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
           }
         }
       }
@@ -36,6 +45,11 @@
       "sha512": "sha512-gXRmIy3Va0mwwr8usnqVRQFoFIJaJGlWTTXBlwxIkHB/xwXnq1Ybs1YNA2BM1O4G46JLLlGjg6YOwrTZusuY3Q==",
       "path": "refit/8.0.0",
       "hashPath": "refit.8.0.0.nupkg.sha512"
+    },
+    "Incidenten.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

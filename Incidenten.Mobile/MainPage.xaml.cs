@@ -1,33 +1,49 @@
-﻿using Incidenten.Shared.Api;
+﻿using Incidenten.Mobile.Services;
+using Incidenten.Shared.Api;
 
 namespace Incidenten.Mobile;
 
 public partial class MainPage : ContentPage
 {
-	public readonly ITestApi _testApi;
+	private readonly AuthService _authService;
 
-	public MainPage(ITestApi testApi)
+	public MainPage(AuthService authService)
 	{
 		InitializeComponent();
-		_testApi = testApi;
+		_authService = authService;
 	}
 
-	public async void OnSendClicked(object sender, EventArgs e)
+	private async void OnAccountClicked(object sender, EventArgs e)
 	{
-		try
-		{
-			var input = InputEntry.Text;
+		var action = _authService.IsAuthenticated
+			? await DisplayActionSheet(
+				"Account", 
+				"Cancel", 
+				null, 
+				"My account", 
+				"Log out")
+			: await DisplayActionSheet(
+				"Account", 
+				"Cancel", 
+				null, 
+				"Log in", 
+				"Sign up");
 
-			var response = await _testApi.SendTest(new TestRequest
-			{
-				testString = input
-			});
-
-			ResultLabel.Text = $"Response: {response.Result}";
-		}
-		catch (Exception ex)
+		switch (action)
 		{
-			ResultLabel.Text = $"Error: {ex.Message}";
+			case "Log in":
+				await Shell.Current.GoToAsync("LoginPage");
+				break;
+			case "Sign up":
+				await Shell.Current.GoToAsync("SignupPage");
+				break;
+			case "My account":
+				await Shell.Current.GoToAsync("UserPage");
+				break;
+			case "Log out":
+				_authService.RemoveToken();
+				await Shell.Current.GoToAsync("MainPage");
+				break;
 		}
 	}
 }

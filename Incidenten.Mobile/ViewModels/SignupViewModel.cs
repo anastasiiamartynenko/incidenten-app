@@ -1,0 +1,108 @@
+using System.Windows.Input;
+using Incidenten.Mobile.Services;
+using Incidenten.Shared.Api;
+using Incidenten.Shared.DTO.User;
+using Incidenten.Shared.Utils;
+
+namespace Incidenten.Mobile.ViewModels;
+
+public class SignupViewModel : _BaseViewModel
+{
+    private readonly IUserApi _userApi;
+    private readonly AuthService _authService;
+    private readonly ValidationHelper _validationHelper = new ();
+
+    public SignupViewModel(IUserApi userApi, AuthService authService)
+    {
+        _userApi = userApi;
+        _authService = authService;
+        SignupCommand = new Command(async () => await SignUp());
+    }
+    
+    private string _fullName = String.Empty;
+
+    public string FullName
+    {
+        get => _fullName;
+        set
+        {
+            _fullName = value;
+            OnPropertyChanged();
+        }
+    }
+    
+    private string _email = String.Empty;
+
+    public string Email
+    {
+        get => _email;
+        set
+        {
+            _email = value;
+            OnPropertyChanged();
+        }
+    }
+    
+    private string _password = String.Empty;
+
+    public string Password
+    {
+        get => _password;
+        set
+        {
+            _password = value;
+            OnPropertyChanged();
+        }
+    }
+    
+    public ICommand SignupCommand { get; }
+
+    private async Task SignUp()
+    {
+        Error = String.Empty;
+        
+        // Validate full name.
+        if (!_validationHelper.IsValidFullname(FullName))
+        {
+            Error = "Fullname is blank.";
+            return;
+        }
+        
+        // Validate email.
+        if (!_validationHelper.IsValidEmail(Email))
+        {
+            Error = "Email is not valid";
+            return;
+        }
+        
+        // Validate password.
+        if (!_validationHelper.IsValidPassword(Password))
+        {
+            Error = "Password is not valid";
+            return;
+        }
+
+        try
+        {
+            // Send SignUp request.
+            var response = await _userApi.SignUp(new SignUpRequest
+            {
+                Email = Email,
+                Password = Password,
+                FullName = FullName
+            });
+
+            if (response.Token != null)
+            {
+                // Set token.
+                _authService.SetToken(response.Token);
+                // Redirect to the home page.
+                await Shell.Current.GoToAsync("MainPage");
+            }
+        }
+        catch (Exception ex)
+        {
+            Error = "An error occurred:" + ex.Message;
+        }
+    }
+}

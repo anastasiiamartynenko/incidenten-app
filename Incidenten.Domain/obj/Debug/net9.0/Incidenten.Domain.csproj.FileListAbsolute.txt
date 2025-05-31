@@ -9,3 +9,4 @@ D:\c#\IncidentenApp\Incidenten.Domain\obj\Debug\net9.0\Incidenten.Domain.dll
 D:\c#\IncidentenApp\Incidenten.Domain\obj\Debug\net9.0\refint\Incidenten.Domain.dll
 D:\c#\IncidentenApp\Incidenten.Domain\obj\Debug\net9.0\Incidenten.Domain.pdb
 D:\c#\IncidentenApp\Incidenten.Domain\obj\Debug\net9.0\ref\Incidenten.Domain.dll
+D:\c#\IncidentenApp\Incidenten.Domain\obj\Debug\net9.0\Incidenten.Domain.sourcelink.json

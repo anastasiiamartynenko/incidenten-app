@@ -1,10 +1,11 @@
 {
   "mainAssemblyName": "Incidenten.Web",
   "resources": {
-    "hash": "sha256-sKbw6yew0fBOmES5q3NXI1j2pDw4d4+xIrMr0Kd2FJE=",
+    "hash": "sha256-EOvqdS9FyLr2sHJvG2w3/xIbTyuLPMH+MIOzOB5kOo4=",
     "fingerprinting": {
       "AuralizeBlazor.s2t6tikn24.wasm": "AuralizeBlazor.wasm",
       "Blazored.FluentValidation.x0xsecpmtx.wasm": "Blazored.FluentValidation.wasm",
+      "Blazored.LocalStorage.12n6dz54qr.wasm": "Blazored.LocalStorage.wasm",
       "BlazorJS.xrd9wk297d.wasm": "BlazorJS.wasm",
       "BlazorParameterCastingMagic.3ymqmwu3kr.wasm": "BlazorParameterCastingMagic.wasm",
       "ExcelDataReader.7o83y7obn7.wasm": "ExcelDataReader.wasm",
@@ -236,10 +237,12 @@
       "icudt_CJK.tjcz0u77k5.dat": "icudt_CJK.dat",
       "icudt_EFIGS.tptq2av103.dat": "icudt_EFIGS.dat",
       "icudt_no_CJK.lfu7j35m59.dat": "icudt_no_CJK.dat",
-      "Incidenten.Shared.vmqwluovf3.wasm": "Incidenten.Shared.wasm",
-      "Incidenten.Shared.t5nddm5mq5.pdb": "Incidenten.Shared.pdb",
-      "Incidenten.Web.bib2vc14b3.wasm": "Incidenten.Web.wasm",
-      "Incidenten.Web.2nswctt039.pdb": "Incidenten.Web.pdb"
+      "Incidenten.Domain.6htcrm4dk2.wasm": "Incidenten.Domain.wasm",
+      "Incidenten.Shared.f7ghsmimwp.wasm": "Incidenten.Shared.wasm",
+      "Incidenten.Shared.1eovxp7hrj.pdb": "Incidenten.Shared.pdb",
+      "Incidenten.Domain.94qxqqns4s.pdb": "Incidenten.Domain.pdb",
+      "Incidenten.Web.fvpdapnayp.wasm": "Incidenten.Web.wasm",
+      "Incidenten.Web.592oxlcugm.pdb": "Incidenten.Web.pdb"
     },
     "jsModuleNative": {
       "dotnet.native.uhsveqo9bs.js": "sha256-/ifJokfQvXKw1hEziCkYR9SOJIKSdGG/UKw5gbLWrj0="
@@ -262,6 +265,7 @@
     "assembly": {
       "AuralizeBlazor.s2t6tikn24.wasm": "sha256-TGKNhAA8xhbpa+jDaa8muJY51uMcFCK/TAFWb62AYfM=",
       "Blazored.FluentValidation.x0xsecpmtx.wasm": "sha256-MSQuUWmw/uBMui2/n4kdEKi0h5j0G+EuO1sM6KK6ltM=",
+      "Blazored.LocalStorage.12n6dz54qr.wasm": "sha256-OaMAAd5n7ORfyur5e3QIyEVKJ76MKIvwbg7/icnnYcU=",
       "BlazorJS.xrd9wk297d.wasm": "sha256-/f1ojZvy0EZZno7makp9Zi4/dILF6rwAirl4ODQCwMo=",
       "BlazorParameterCastingMagic.3ymqmwu3kr.wasm": "sha256-VRMmPe5UhhftT+KBdp3O7hX0C8h1l5qQGjKGrRYf+Lg=",
       "ExcelDataReader.7o83y7obn7.wasm": "sha256-p2z9GHuyV5pTFXT+GKmexXTO4ltRggPcT9q47Kjwzvg=",
@@ -484,12 +488,14 @@
       "WindowsBase.pe1q66fox7.wasm": "sha256-X+jubl681x6U1UjhhKVz+cjOvMv1wDBWIyyFenqJnPc=",
       "mscorlib.ypkr78tz1c.wasm": "sha256-Wkc7KpMw/bTWNoLCRv9T8olIOmCpEiJSeUZsUQEnwrA=",
       "netstandard.ifx8vojh9u.wasm": "sha256-PqpRCbO73PFsE8ik5zmAuG1kKax3c7bGhjOOeuiUcyY=",
-      "Incidenten.Shared.vmqwluovf3.wasm": "sha256-KQSBupi6MuacN5HnQHy2QOZvrla7IAcAh6yKemNCQVE=",
-      "Incidenten.Web.bib2vc14b3.wasm": "sha256-PRolIWmIRkL1pT8wrS4Em3TM3kWyierH0ePsVcRufZo="
+      "Incidenten.Domain.6htcrm4dk2.wasm": "sha256-OrO4+qk6pKYmigUeSdhNPftgOQNX4VnzugtlxfAY9fc=",
+      "Incidenten.Shared.f7ghsmimwp.wasm": "sha256-tT8v/ciHY8PB8rxtSOpLzwBg1AewmT0Xmmb4f4aiIYE=",
+      "Incidenten.Web.fvpdapnayp.wasm": "sha256-OwIz52GL4rknQXcHcIyvGrw7mszsL1OfaScUTAhEwzA="
     },
     "pdb": {
-      "Incidenten.Shared.t5nddm5mq5.pdb": "sha256-gctT4KYUqrZDFCv/pvqhSKQ6X4aTPv17zHa2CQpIFCY=",
-      "Incidenten.Web.2nswctt039.pdb": "sha256-ArfkP0wLiNGN38i0pDln+fpHoqZYAPU/EzmnmiQE1n0="
+      "Incidenten.Shared.1eovxp7hrj.pdb": "sha256-OQKhnvwlsm06vxtuADJRLAVbOR0z/B5HO/Amvg0PVZ0=",
+      "Incidenten.Domain.94qxqqns4s.pdb": "sha256-h4sLCMpu1rmJpxdeSS95DJDqXcWjed9VXpivJZIcOGI=",
+      "Incidenten.Web.592oxlcugm.pdb": "sha256-aZb2ylunAQVShNtLiRGNnGBE6/gUmV+bobCtyv8AThk="
     },
     "libraryInitializers": {
       "_content/BlazorJS/BlazorJS.o5pk8zvhtc.lib.module.js": "sha256-pJ9th4xzJ1OMZjS4dv7BMz2u879ku+Hu3qkTZk+1LGw=",
