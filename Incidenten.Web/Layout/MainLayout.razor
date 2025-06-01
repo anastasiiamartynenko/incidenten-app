@@ -1,6 +1,9 @@
 ﻿@inherits LayoutComponentBase
 @inject AuthService AuthService;
 @inject NavigationManager NavigationManager;
+@inject AuthState AuthState;
+
+@implements IDisposable
 
 <MudThemeProvider />
 <MudDialogProvider />
@@ -15,6 +18,10 @@
         }
         <MudSpacer/>
         <MudText Typo="Typo.h6">Incidenten Web App</MudText>
+        <MudIconButton 
+            Icon="@Icons.Material.Filled.Add" 
+            Color="Color.Inherit" 
+            OnClick="@(() => NavigationManager.NavigateTo("/create-incident"))" />
         <MudMenu Icon="@Icons.Material.Filled.Person" AriaLabel="Open user menu">
             @if (_isAuthenticated)
             {
@@ -43,7 +50,7 @@
 
 @code {
     bool _isAuthenticated;
-    bool _open = false;
+    bool _open;
 
     private void ToggleDrawer()
     {
@@ -53,11 +60,23 @@
     protected override async Task OnInitializedAsync()
     {
         _isAuthenticated = await AuthService.IsAuthenticatedAsync();
+        AuthState.OnChange += StateChanged;
+    }
+
+    private async void StateChanged()
+    {
+        _isAuthenticated = await AuthService.IsAuthenticatedAsync();
+        await InvokeAsync(StateHasChanged);
     }
 
     async Task LogOut()
     {
         await AuthService.RemoveTokenAsync();
         NavigationManager.NavigateTo("/log-in");
+    }
+
+    public void Dispose()
+    {
+        AuthState.OnChange -= StateChanged;
     }
 }

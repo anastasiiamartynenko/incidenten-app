@@ -4,10 +4,15 @@
              x:Class="Incidenten.Mobile.MainPage">
     <ContentPage.ToolbarItems>
         <ToolbarItem 
+            IconImageSource="plus.png" 
+            Text="Create incident"
+            Order="Primary"
+            Clicked="OnPlusClicked" />
+        <ToolbarItem 
             IconImageSource="person.png"
             Text="Account"
             Order="Primary"
-            Clicked="OnAccountClicked"/>
+            Clicked="OnAccountClicked" />
     </ContentPage.ToolbarItems>
     
     <ScrollView>

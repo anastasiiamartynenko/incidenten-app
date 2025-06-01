@@ -6,6 +6,8 @@
              Title="Sign up">
     <ContentPage.Content>
         <VerticalStackLayout Padding="40" Spacing="15">
+            <Label Text="Sign up" FontSize="20" />
+            
             <Entry 
                 Text="{Binding FullName}"
                 Placeholder="Full name" />

@@ -62,7 +62,7 @@ public class SignupViewModel : _BaseViewModel
         Error = String.Empty;
         
         // Validate full name.
-        if (!_validationHelper.IsValidFullname(FullName))
+        if (!_validationHelper.IsNotBlank(FullName))
         {
             Error = "Fullname is blank.";
             return;
@@ -97,7 +97,7 @@ public class SignupViewModel : _BaseViewModel
                 // Set token.
                 _authService.SetToken(response.Token);
                 // Redirect to the home page.
-                await Shell.Current.GoToAsync("MainPage");
+                await Shell.Current.GoToAsync("//MainPage");
             }
         }
         catch (Exception ex)

@@ -32,6 +32,10 @@ build_property.EnableCodeStyleSeverity =
 build_metadata.AdditionalFiles.TargetPath = QXBwLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/c\#/IncidentenApp/Incidenten.Web/Pages/CreateIncident.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQ3JlYXRlSW5jaWRlbnQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/c\#/IncidentenApp/Incidenten.Web/Pages/Home.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 

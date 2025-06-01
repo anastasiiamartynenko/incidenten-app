@@ -28,10 +28,14 @@ var settings = new RefitSettings
 
 builder.Services.AddScoped<AuthService>();
 builder.Services.AddScoped<AuthTokenInjector>();
+builder.Services.AddScoped<AuthState>();
 
 builder.Services.AddRefitClient<ITestApi>(settings)
     .ConfigureHttpClient(client => client.BaseAddress = new Uri(apiBaseUrl));
 builder.Services.AddRefitClient<IUserApi>(settings)
+    .ConfigureHttpClient(client => client.BaseAddress = new Uri(apiBaseUrl))
+    .AddHttpMessageHandler<AuthTokenInjector>();
+builder.Services.AddRefitClient<IIncidentApi>(settings)
     .ConfigureHttpClient(client => client.BaseAddress = new Uri(apiBaseUrl))
     .AddHttpMessageHandler<AuthTokenInjector>();
 

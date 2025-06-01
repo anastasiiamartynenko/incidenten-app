@@ -22,6 +22,52 @@ namespace Incidenten.Infrastructures.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("Incidenten.Domain.Incident", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime?>("CompletedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime?>("DeadlineAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("ExecutorId")
+                        .HasColumnType("uuid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer");
+
+                    b.Property<Guid>("ReporterId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExecutorId");
+
+                    b.HasIndex("ReporterId");
+
+                    b.ToTable("incidents", (string)null);
+                });
+
             modelBuilder.Entity("Incidenten.Domain.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -55,6 +101,44 @@ namespace Incidenten.Infrastructures.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("users", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("00000000-0000-0000-0000-000000000001"),
+                            CreatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc),
+                            Email = "",
+                            FullName = "",
+                            Password = "",
+                            Role = 0,
+                            SendNotifications = true,
+                            UpdatedAt = new DateTime(2024, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc)
+                        });
+                });
+
+            modelBuilder.Entity("Incidenten.Domain.Incident", b =>
+                {
+                    b.HasOne("Incidenten.Domain.User", "Executor")
+                        .WithMany("ResolvedIncidents")
+                        .HasForeignKey("ExecutorId")
+                        .OnDelete(DeleteBehavior.SetNull);
+
+                    b.HasOne("Incidenten.Domain.User", "Reporter")
+                        .WithMany("ReportedIncidents")
+                        .HasForeignKey("ReporterId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Executor");
+
+                    b.Navigation("Reporter");
+                });
+
+            modelBuilder.Entity("Incidenten.Domain.User", b =>
+                {
+                    b.Navigation("ReportedIncidents");
+
+                    b.Navigation("ResolvedIncidents");
                 });
 #pragma warning restore 612, 618
         }

@@ -13,6 +13,11 @@ public partial class MainPage : ContentPage
 		_authService = authService;
 	}
 
+	private async void OnPlusClicked(object sender, EventArgs e)
+	{
+		await Shell.Current.GoToAsync("CreateIncidentPage");
+	}
+	
 	private async void OnAccountClicked(object sender, EventArgs e)
 	{
 		var action = _authService.IsAuthenticated
@@ -42,7 +47,7 @@ public partial class MainPage : ContentPage
 				break;
 			case "Log out":
 				_authService.RemoveToken();
-				await Shell.Current.GoToAsync("MainPage");
+				await Shell.Current.GoToAsync("//MainPage");
 				break;
 		}
 	}

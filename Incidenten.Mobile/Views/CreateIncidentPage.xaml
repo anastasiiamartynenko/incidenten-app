@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Incidenten.Mobile.Views.CreateIncidentPage">
+    <ContentPage.Content>
+        <VerticalStackLayout Padding="40" Spacing="15">
+            <Label Text="Create an incident" FontSize="20" />
+            
+            <Entry 
+                Text="{Binding Name}" 
+                Placeholder="Name" />
+            <Entry 
+                Text="{Binding Description}" 
+                Placeholder="Description" />
+            
+            <Label 
+                Text="{Binding Error}" 
+                TextColor="Red" 
+                FontSize="12" 
+                IsVisible="{Binding Error, Converter={StaticResource StringNotEmpty}}" />
+            
+            <Button 
+                Text="Create"
+                Command="{Binding CreateIncidentCommand}"
+                Width="200" />
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>

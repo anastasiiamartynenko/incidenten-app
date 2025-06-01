@@ -51,9 +51,9 @@ public class ValidationHelper
     /**
      * Returns true if the full name is valid.
      */
-    public bool IsValidFullname(string fullname)
+    public bool IsNotBlank(string value)
     {
-        if (string.IsNullOrEmpty(fullname))
+        if (string.IsNullOrEmpty(value))
             return false;
         return true;
     }

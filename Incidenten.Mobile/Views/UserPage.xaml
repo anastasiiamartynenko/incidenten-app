@@ -6,7 +6,7 @@
              Title="My account">
     <ContentPage.Content>
         <VerticalStackLayout Padding="40" Spacing="15">
-            <Label Text="Welcome!" FontSize="20" />
+            <Label Text="My account" FontSize="20" />
 
             <Label Text="{Binding FullName}" FontAttributes="Bold" />
             <Label Text="{Binding Email}" />

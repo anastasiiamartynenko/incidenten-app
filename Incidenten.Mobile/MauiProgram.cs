@@ -28,7 +28,7 @@ public static class MauiProgram
 		
 		// Add auth service.
 		builder.Services.AddSingleton<AuthService>();
-		builder.Services.AddSingleton<AuthTokenInjector>();
+		builder.Services.AddTransient<AuthTokenInjector>();
 
 		builder.Services.AddRefitClient<ITestApi>()
 			.ConfigureHttpClient(client =>
@@ -41,11 +41,19 @@ public static class MauiProgram
 					client.BaseAddress = new Uri(apiBase);
 			})
 			.AddHttpMessageHandler<AuthTokenInjector>();
+		builder.Services.AddRefitClient<IIncidentApi>()
+			.ConfigureHttpClient(client =>
+			{
+				client.BaseAddress = new Uri(apiBase);
+			})
+			.AddHttpMessageHandler<AuthTokenInjector>();
 		
 		// Add ViewModels.
 		builder.Services.AddTransient<LoginViewModel>();
 		builder.Services.AddTransient<SignupViewModel>();
 		builder.Services.AddTransient<UserViewModel>();
+
+		builder.Services.AddTransient<CreateIncidentViewModel>();
 
 #if DEBUG
 		builder.Logging.AddDebug();
