@@ -3,14 +3,14 @@
 @inject AuthService AuthService;
 @inject NavigationManager NavigationManager
 
-<MudPaper Class="pa-4">
-    <MudText>My account</MudText>
+<MudPaper Class="pa-4" Elevation="0">
+    <MudText Typo="Typo.h4">My account</MudText>
     
-    <MudText><strong>Email: </strong> @_user?.Email</MudText>
-    <MudText><strong>Full name: </strong> @_user?.FullName</MudText>
-    <MudText><strong>Role: </strong> @_user?.Role</MudText>
+    <MudText class="mt-3"><strong>Email: </strong> @_user?.Email</MudText>
+    <MudText class="mt-3"><strong>Full name: </strong> @_user?.FullName</MudText>
+    <MudText class="mt-3"><strong>Role: </strong> @_user?.Role</MudText>
     
-    <MudButton OnClick="LogOut" Color="Color.Error" Variant="Variant.Filled">Log out</MudButton>
+    <MudButton class="mt-3" OnClick="LogOut" Color="Color.Error" Variant="Variant.Filled">Log out</MudButton>
 </MudPaper>
 
 @code {

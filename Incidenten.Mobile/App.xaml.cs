@@ -9,9 +9,11 @@ public partial class App : Application
 	{
 		InitializeComponent();
 		
+		Routing.RegisterRoute("MainPage", typeof(MainPage));
 		Routing.RegisterRoute("LoginPage", typeof(LoginPage));
 		Routing.RegisterRoute("SignupPage", typeof(SignupPage));
 		Routing.RegisterRoute("UserPage", typeof(UserPage));
+		Routing.RegisterRoute("CreateIncidentPage", typeof(CreateIncidentPage));
 	}
 
 	protected override Window CreateWindow(IActivationState? activationState)

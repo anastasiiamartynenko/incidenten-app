@@ -1,4 +1,5 @@
-﻿using Incidenten.Domain.Enums;
+﻿using System.Text.Json.Serialization;
+using Incidenten.Domain.Enums;
 
 namespace Incidenten.Domain;
 
@@ -10,4 +11,9 @@ public class User : _Base
     public bool SendNotifications { get; set; } = true;
 
     public UserRole Role { get; set; } = UserRole.Citizen;
+    
+    [JsonIgnore]
+    public List<Incident> ReportedIncidents { get; set; } = new();
+    [JsonIgnore]
+    public List<Incident> ResolvedIncidents { get; set; } = new();
 }

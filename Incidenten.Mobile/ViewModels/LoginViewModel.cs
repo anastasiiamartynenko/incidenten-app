@@ -69,7 +69,7 @@ public class LoginViewModel : _BaseViewModel
                 // Set token.
                 _authService.SetToken(result.Token);
                 // Redirect to the home page.
-                await Shell.Current.GoToAsync("MainPage");
+                await Shell.Current.GoToAsync("//MainPage");
             }
             else Error = "Invalid credentials.";
         }

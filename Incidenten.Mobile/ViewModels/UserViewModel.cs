@@ -63,13 +63,13 @@ public class UserViewModel : _BaseViewModel
         catch (Exception ex)
         {
             Error = "An error occured" + ex.Message;
-            await Shell.Current.GoToAsync("MainPage");
+            await Shell.Current.GoToAsync("//MainPage");
         }
     }
 
     public void Logout()
     {
         _authService.RemoveToken();
-        Shell.Current.GoToAsync("MainPage");
+        Shell.Current.GoToAsync("//MainPage");
     }
 }

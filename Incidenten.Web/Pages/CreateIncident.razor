@@ -1,0 +1,39 @@
+@page "/create-incident"
+@inject NavigationManager NavigationManager
+@inject IIncidentApi IncidentApi
+
+<MudPaper class="pa-4" Elevation="0">
+    <MudText Typo="Typo.h4">Create an incident</MudText>
+    
+    <MudTextField @bind-Value="_name" Label="Name" class="mt-3"/>
+    <MudTextField @bind-Value="_description" Label="Description" class="mt-3" Lines="4"/>
+    
+    <MudText Color="Color.Error" class="mt-3">@_error</MudText>
+    <MudButton OnClick="CreateAnIncident" Variant="Variant.Filled" Color="Color.Primary" class="mt-3">Create</MudButton>
+</MudPaper>
+
+@code {
+    string _name = "";
+    string _description = "";
+    string _error = string.Empty;
+
+    private async Task CreateAnIncident()
+    {
+        _error = string.Empty;
+
+        try
+        {
+            await IncidentApi.CreateIncident(new CreateIncidentRequest
+            {
+                Name = _name,
+                Description = _description
+            });
+
+            NavigationManager.NavigateTo("/");
+        }
+        catch (Exception ex)
+        {
+            _error = "An error occurred: " + ex.Message;
+        }
+    }
+}

@@ -6,6 +6,8 @@
              Title="Log in">
     <ContentPage.Content>
         <VerticalStackLayout Padding="40" Spacing="15">
+            <Label Text="Log in" FontSize="20" />
+            
             <Entry 
                 Text="{Binding Email}" 
                 Placeholder="Email" />
