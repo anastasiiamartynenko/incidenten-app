@@ -1,4 +1,5 @@
 using Incidenten.Domain;
+using Incidenten.Domain.Enums;
 using Incidenten.Infrastructures;
 using Incidenten.Shared.DTO.Incident;
 using Microsoft.AspNetCore.Authorization;
@@ -46,5 +47,80 @@ public class IncidentController(IncidentenDbContext db, IConfiguration configura
         await db.SaveChangesAsync();
         
         return Ok(incident);
+    }
+
+    /**
+     * Get the incidents reported by the user.
+     */
+    [Authorize]
+    [HttpGet("my/reported")]
+    public async Task<IActionResult> GetMyReportedIncidents()
+    {
+        var email = User.Identity?.Name;
+        var user = await db.Users.FirstOrDefaultAsync(u => u.Email == email);
+
+        // The endpoint should only be available for the authorized users.
+        if (user == null || user.Role == UserRole.Anonym) return Unauthorized();
+        
+        // Return the incidents created by the user who initiated the request.
+        var incidents = await db.Incidents
+            .Include(i => i.Reporter)
+            .Where(i => i.ReporterId == user.Id)
+            .ToListAsync();
+        return Ok(incidents);
+    }
+
+    /**
+     * Get the incidents assigned to the user.
+     */
+    [HttpGet("my/assigned")]
+    public async Task<IActionResult> GetMyAssignedIncidents()
+    {
+        var email = User.Identity?.Name;
+        var user = await db.Users.FirstOrDefaultAsync(u => u.Email == email);
+
+        // The endpoint should only be available for the employees.
+        if (user is not { Role: UserRole.Employee }) return Unauthorized();
+        
+        // Return the incidents whose executor is the user who initiated the request.
+        var incidents = await db.Incidents
+            .Include(i => i.Executor)
+            .Where(i => i.ExecutorId == user.Id)
+            .ToListAsync();
+        return Ok(incidents);
+    }
+
+    /**
+     * Get all the incidents (filtered).
+     */
+    [Authorize]
+    [HttpGet("all")]
+    public async Task<IActionResult> GetFilteredIncidents(
+        [FromQuery] IncidentStatus? status,
+        [FromQuery] IncidentPriority? priority)
+    {
+        var email = User.Identity?.Name;
+        var user = await db.Users.FirstOrDefaultAsync(u => u.Email == email);
+
+        // The endpoint should only be available for the employees and officials.
+        if (user is not { Role: UserRole.Employee } && user is not { Role: UserRole.Official }) 
+            return Unauthorized();
+        
+        // Create the query.
+        var query = db.Incidents.AsQueryable();
+        
+        if (status.HasValue)
+        {
+            query = query.Where(i => i.Status == status);
+        }
+
+        if (priority.HasValue)
+        {
+            query = query.Where(i => i.Priority == priority);
+        }
+        
+        // Return the filtered incidents.
+        var incidents = await query.ToListAsync();
+        return Ok(incidents);
     }
 }

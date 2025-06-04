@@ -5,19 +5,17 @@ namespace Incidenten.Mobile;
 
 public partial class App : Application
 {
-	public App()
+	private readonly IServiceProvider _serviceProvider;
+	private readonly AuthService _authService;
+	public App(IServiceProvider serviceProvider, AuthService authService)
 	{
 		InitializeComponent();
-		
-		Routing.RegisterRoute("MainPage", typeof(MainPage));
-		Routing.RegisterRoute("LoginPage", typeof(LoginPage));
-		Routing.RegisterRoute("SignupPage", typeof(SignupPage));
-		Routing.RegisterRoute("UserPage", typeof(UserPage));
-		Routing.RegisterRoute("CreateIncidentPage", typeof(CreateIncidentPage));
+		_serviceProvider = serviceProvider;
+		_authService = authService;
 	}
 
 	protected override Window CreateWindow(IActivationState? activationState)
 	{
-		return new Window(new AppShell());
+		return new Window(new AppShell(_serviceProvider, _authService));
 	}
 }

@@ -47,6 +47,7 @@ public partial class MainPage : ContentPage
 				break;
 			case "Log out":
 				_authService.RemoveToken();
+				_authService.NotifyAuthChanged();
 				await Shell.Current.GoToAsync("//MainPage");
 				break;
 		}

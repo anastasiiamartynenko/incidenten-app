@@ -54,6 +54,7 @@ public static class MauiProgram
 		builder.Services.AddTransient<UserViewModel>();
 
 		builder.Services.AddTransient<CreateIncidentViewModel>();
+		builder.Services.AddTransient<MyReportedIncidentsViewModel>();
 
 #if DEBUG
 		builder.Logging.AddDebug();
