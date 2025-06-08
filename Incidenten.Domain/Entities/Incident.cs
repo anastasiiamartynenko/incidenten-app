@@ -1,3 +1,4 @@
+using System.ComponentModel.DataAnnotations.Schema;
 using Incidenten.Domain.Enums;
 
 namespace Incidenten.Domain;
@@ -18,4 +19,14 @@ public class Incident : _Base
 
     public Guid? ExecutorId { get; set; }
     public User? Executor { get; set; }
+    
+    public List<IncidentImage> Images { get; set; } = new();
+
+    [NotMapped] public string FirstImageUrl => Images.FirstOrDefault() is { Filename: var name }
+        ? $"http://localhost:5000/images/{Images.FirstOrDefault()?.Filename}"
+        : "http://localhost:5000/images/NO_IMAGE_PLACEHOLDER.png";
+    
+    [NotMapped] public string FirstImageUrlAndroid => Images.FirstOrDefault() is { Filename: var name }
+        ? $"http://10.0.2.2:5000/images/{Images.FirstOrDefault()?.Filename}"
+        : "http://10.0.2.2:5000/images/NO_IMAGE_PLACEHOLDER.png";
 }

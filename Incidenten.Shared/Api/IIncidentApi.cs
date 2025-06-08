@@ -17,4 +17,10 @@ public interface IIncidentApi
     
     [Get("/incident/all")]
     Task<List<Incident>> GetAllIncidents([Query] GetIncidentsFilter filter);
+
+    [Multipart]
+    [Post("/incidentImage/{id}")]
+    Task UploadImages(
+        Guid id,
+        [AliasAs("images")] IEnumerable<StreamPart> images);
 }

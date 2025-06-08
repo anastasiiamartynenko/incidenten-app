@@ -8,18 +8,32 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Border Padding="10" Margin="5">
-                        <VerticalStackLayout>
-                            <Label Text="{Binding Name}" FontAttributes="Bold" />
-                            <Label Text="{Binding Description}" />
-                            <HorizontalStackLayout>
-                                <Label Text="Status: " FontAttributes="Bold" />
-                                <Label Text="{Binding Status}" />
-                            </HorizontalStackLayout>
-                            <HorizontalStackLayout>
-                                <Label Text="Priority: " FontAttributes="Bold"></Label>
-                                <Label Text="{Binding Priority}" />
-                            </HorizontalStackLayout>
-                        </VerticalStackLayout>
+                        <HorizontalStackLayout>
+                            <!-- First image associated with an incident -->
+                            <Image 
+                                Source="{Binding FirstImageUrlAndroid}" 
+                                WidthRequest="100"
+                                HeightRequest="100"
+                                Aspect="AspectFill"
+                                Margin="0,0,10,0" />
+                            
+                            <VerticalStackLayout>
+                                <!-- Name of the incident -->
+                                <Label Text="{Binding Name}" FontAttributes="Bold" />
+                                <!-- Description of the incident -->
+                                <Label Text="{Binding Description}" />
+                                <!-- Status of the incident -->
+                                <HorizontalStackLayout>
+                                    <Label Text="Status: " FontAttributes="Bold" />
+                                    <Label Text="{Binding Status}" />
+                                </HorizontalStackLayout>
+                                <!-- Priority of the incident -->
+                                <HorizontalStackLayout>
+                                    <Label Text="Priority: " FontAttributes="Bold"></Label>
+                                    <Label Text="{Binding Priority}" />
+                                </HorizontalStackLayout>
+                            </VerticalStackLayout>
+                        </HorizontalStackLayout>
                     </Border>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
