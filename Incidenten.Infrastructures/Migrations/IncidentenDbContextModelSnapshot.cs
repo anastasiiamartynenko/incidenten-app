@@ -94,6 +94,35 @@ namespace Incidenten.Infrastructures.Migrations
                     b.ToTable("incident_images", (string)null);
                 });
 
+            modelBuilder.Entity("Incidenten.Domain.IncidentLocation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<Guid>("IncidentId")
+                        .HasColumnType("uuid");
+
+                    b.Property<double>("Latitude")
+                        .HasColumnType("double precision");
+
+                    b.Property<double>("Longitude")
+                        .HasColumnType("double precision");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IncidentId")
+                        .IsUnique();
+
+                    b.ToTable("incident_locations", (string)null);
+                });
+
             modelBuilder.Entity("Incidenten.Domain.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -171,9 +200,22 @@ namespace Incidenten.Infrastructures.Migrations
                     b.Navigation("Incident");
                 });
 
+            modelBuilder.Entity("Incidenten.Domain.IncidentLocation", b =>
+                {
+                    b.HasOne("Incidenten.Domain.Incident", "Incident")
+                        .WithOne("Location")
+                        .HasForeignKey("Incidenten.Domain.IncidentLocation", "IncidentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Incident");
+                });
+
             modelBuilder.Entity("Incidenten.Domain.Incident", b =>
                 {
                     b.Navigation("Images");
+
+                    b.Navigation("Location");
                 });
 
             modelBuilder.Entity("Incidenten.Domain.User", b =>

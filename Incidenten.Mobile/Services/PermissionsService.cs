@@ -13,10 +13,35 @@ public class PermissionsService
     }
 
     /**
+     * Check and request location permissions.
+     */
+    public async Task CheckAndRequestLocationPermission()
+    {
+        var isLocationPermissionGranted = await IsLocationPermissionGranted();
+        if (Permissions.ShouldShowRationale<Permissions.LocationWhenInUse>())
+        {
+            // TODO: show rationale.
+        }
+        if (!isLocationPermissionGranted)
+        {
+            await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+        }
+    }
+
+    /**
      * Check camera permission.
      */
     public async Task<bool> IsCameraPermissionGranted()
     {
         return await Permissions.CheckStatusAsync<Permissions.Camera>() == PermissionStatus.Granted;
+    }
+
+    /**
+     * Check location permissions.
+     */
+    public async Task<bool> IsLocationPermissionGranted()
+    {
+        return await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>() == PermissionStatus.Granted
+            || await Permissions.CheckStatusAsync<Permissions.LocationAlways>() == PermissionStatus.Granted;
     }
 }

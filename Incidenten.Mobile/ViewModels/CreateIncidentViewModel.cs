@@ -14,6 +14,7 @@ public class CreateIncidentViewModel : _BaseViewModel
 {
     private readonly IIncidentApi _incidentApi;
     private readonly PermissionsService _permissionsService = new ();
+    private readonly LocationService _locationService = new ();
     private readonly ValidationHelper _validationHelper = new ();
     private readonly ImageHelper _imageHelper = new ();
 
@@ -23,6 +24,8 @@ public class CreateIncidentViewModel : _BaseViewModel
         CreateIncidentCommand = new Command(async () => await CreateIncident());
         UploadFromGalleryCommand = new Command(async () => await UploadFromGallery());
         UploadFromCameraCommand = new Command(async () => await UploadFromCamera());
+
+        InitializeLocation();
     }
     
     // Name.
@@ -49,8 +52,66 @@ public class CreateIncidentViewModel : _BaseViewModel
         }
     }
     
+    // Incident location latitude.
+    private double _latitude = 0.0;
+    public double Latitude
+    {
+        get => _latitude;
+        set
+        {
+            _latitude = value;
+            OnPropertyChanged();
+        }
+    }
+    
+    // Incident location longitude.
+    private double _longitude = 0.0;
+    public double Longitude
+    {
+        get => _longitude;
+        set
+        {
+            _longitude = value;
+            OnPropertyChanged();
+        }
+    }
+    
     // Images associated with an incident.
     public ObservableCollection<ImageModel> Images { get; set; } = new ();
+
+    public async Task InitializeLocation()
+    {
+        try
+        {
+            await _permissionsService.CheckAndRequestLocationPermission();
+            var isLocationPermissionGranted = await _permissionsService.IsLocationPermissionGranted();
+            
+            if (isLocationPermissionGranted)
+            {
+                var currentUserLocation = await _locationService.GetCurrentLocation();
+                if (currentUserLocation == null)
+                {
+                    var lastKnownLocation = await _locationService.GetLastKnownLocation();
+                    if (lastKnownLocation != null)
+                    {
+                        Latitude = lastKnownLocation.Latitude;
+                        Longitude = lastKnownLocation.Longitude;
+                    }
+                }
+                else
+                {
+                    Latitude = currentUserLocation.Latitude;
+                    Longitude = currentUserLocation.Longitude;
+                }
+            }
+            LocationChanged.Invoke(new Location { Latitude = Latitude, Longitude = Longitude });
+        }
+        catch (Exception ex)
+        {
+            Error = "An error occurred: " + ex.Message;
+            return;
+        }
+    }
     
     /**
      * Upload the images from the gallery.
@@ -116,6 +177,17 @@ public class CreateIncidentViewModel : _BaseViewModel
             Error = "An error occurred:" + ex.Message;
         }
     }
+
+    /**
+     * Handle location changes.
+     */
+    public void HandleLocationChanges(Location location)
+    {
+        Latitude = location.Latitude;
+        Longitude = location.Longitude;
+
+        LocationChanged?.Invoke(location);
+    }
     
     /**
      * Create an incident.
@@ -130,6 +202,11 @@ public class CreateIncidentViewModel : _BaseViewModel
             Error = "Name is required.";
             return;
         }
+        if (Latitude == 0.0 && Longitude == 0.0)
+        {
+            Error = "Location of the incident is required.";
+            return;
+        }
 
         try
         {
@@ -140,17 +217,27 @@ public class CreateIncidentViewModel : _BaseViewModel
                 Description = Description
             });
 
-            // Assemble the images multipart stuff.
-            var imageParts = new List<StreamPart>();
-            foreach (var image in Images)
+            if (Images.Any())
             {
-                var stream = await image.GetStream();
-                var mimetype = _imageHelper.GetMimetype(image.Name);
-                imageParts.Add(new StreamPart(stream, image.Name, mimetype));
+                // Assemble the images multipart stuff.
+                var imageParts = new List<StreamPart>();
+                foreach (var image in Images)
+                {
+                    var stream = await image.GetStream();
+                    var mimetype = _imageHelper.GetMimetype(image.Name);
+                    imageParts.Add(new StreamPart(stream, image.Name, mimetype));
+                }
+                
+                // Upload the images.
+                await _incidentApi.UploadImages(incident.Id, imageParts);
             }
 
-            // Upload the images.
-            await _incidentApi.UploadImages(incident.Id, imageParts);
+            // Provide the location of the incident.
+            await _incidentApi.ProvideIncidentLocation(incident.Id, new ProvideIncidentLocationRequest
+            {
+                Latitude = Latitude,
+                Longitude = Longitude,
+            });
             
             // Redirect the user to the main page.
             await Shell.Current.GoToAsync("//MainPage");
@@ -161,8 +248,11 @@ public class CreateIncidentViewModel : _BaseViewModel
         }
     }
     
+    public event Action<Location?> LocationChanged;
+    
     // Commands.
     public ICommand UploadFromGalleryCommand { get; }
     public ICommand UploadFromCameraCommand { get; }
+    public ICommand MapClickedCommand => new Command<Location>(HandleLocationChanges);
     public ICommand CreateIncidentCommand { get; }
 }
