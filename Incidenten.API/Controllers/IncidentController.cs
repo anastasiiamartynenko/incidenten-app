@@ -65,6 +65,7 @@ public class IncidentController(IncidentenDbContext db, IConfiguration configura
         // Return the incidents created by the user who initiated the request.
         var incidents = await db.Incidents
             .Include(i => i.Reporter)
+            .Include(i => i.Images)
             .Where(i => i.ReporterId == user.Id)
             .ToListAsync();
         return Ok(incidents);

@@ -8,6 +8,7 @@ public class IncidentenDbContext : DbContext
 {
     public DbSet<User> Users { get; set; }
     public DbSet<Incident> Incidents { get; set; }
+    public DbSet<IncidentImage> IncidentImages { get; set; }
     
     public IncidentenDbContext(DbContextOptions<IncidentenDbContext> options)
         : base(options) { }
@@ -39,5 +40,14 @@ public class IncidentenDbContext : DbContext
             .WithMany(u => u.ResolvedIncidents)
             .HasForeignKey(c => c.ExecutorId)
             .OnDelete(DeleteBehavior.SetNull);
+        modelBuilder.Entity<Incident>()
+            .ToTable("incidents")
+            .HasMany(i => i.Images)
+            .WithOne(i => i.Incident)
+            .HasForeignKey(i => i.IncidentId)
+            .OnDelete(DeleteBehavior.Restrict);
+        modelBuilder
+            .Entity<IncidentImage>()
+            .ToTable("incident_images");
     }
 }

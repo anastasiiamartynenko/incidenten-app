@@ -68,6 +68,32 @@ namespace Incidenten.Infrastructures.Migrations
                     b.ToTable("incidents", (string)null);
                 });
 
+            modelBuilder.Entity("Incidenten.Domain.IncidentImage", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Filename")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<Guid>("IncidentId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IncidentId");
+
+                    b.ToTable("incident_images", (string)null);
+                });
+
             modelBuilder.Entity("Incidenten.Domain.User", b =>
                 {
                     b.Property<Guid>("Id")
@@ -132,6 +158,22 @@ namespace Incidenten.Infrastructures.Migrations
                     b.Navigation("Executor");
 
                     b.Navigation("Reporter");
+                });
+
+            modelBuilder.Entity("Incidenten.Domain.IncidentImage", b =>
+                {
+                    b.HasOne("Incidenten.Domain.Incident", "Incident")
+                        .WithMany("Images")
+                        .HasForeignKey("IncidentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Incident");
+                });
+
+            modelBuilder.Entity("Incidenten.Domain.Incident", b =>
+                {
+                    b.Navigation("Images");
                 });
 
             modelBuilder.Entity("Incidenten.Domain.User", b =>
