@@ -7,6 +7,9 @@
         <member name="M:Incidenten.Mobile.Services.LocationService.GetCurrentLocation">
             Get the current location of the user.
         </member>
+        <member name="M:Incidenten.Mobile.Services.LocationService.GetLastKnownLocation">
+            Get the last known location of the user.
+        </member>
         <member name="M:Incidenten.Mobile.Services.LocationService.CancelRequest">
             Cancel the location request.
         </member>

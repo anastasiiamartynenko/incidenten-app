@@ -14,6 +14,7 @@ public class CreateIncidentViewModel : _BaseViewModel
 {
     private readonly IIncidentApi _incidentApi;
     private readonly PermissionsService _permissionsService = new ();
+    private readonly LocationService _locationService = new ();
     private readonly ValidationHelper _validationHelper = new ();
     private readonly ImageHelper _imageHelper = new ();
 
@@ -23,6 +24,8 @@ public class CreateIncidentViewModel : _BaseViewModel
         CreateIncidentCommand = new Command(async () => await CreateIncident());
         UploadFromGalleryCommand = new Command(async () => await UploadFromGallery());
         UploadFromCameraCommand = new Command(async () => await UploadFromCamera());
+
+        InitializeLocation();
     }
     
     // Name.
@@ -75,6 +78,40 @@ public class CreateIncidentViewModel : _BaseViewModel
     
     // Images associated with an incident.
     public ObservableCollection<ImageModel> Images { get; set; } = new ();
+
+    public async Task InitializeLocation()
+    {
+        try
+        {
+            await _permissionsService.CheckAndRequestLocationPermission();
+            var isLocationPermissionGranted = await _permissionsService.IsLocationPermissionGranted();
+            
+            if (isLocationPermissionGranted)
+            {
+                var currentUserLocation = await _locationService.GetCurrentLocation();
+                if (currentUserLocation == null)
+                {
+                    var lastKnownLocation = await _locationService.GetLastKnownLocation();
+                    if (lastKnownLocation != null)
+                    {
+                        Latitude = lastKnownLocation.Latitude;
+                        Longitude = lastKnownLocation.Longitude;
+                    }
+                }
+                else
+                {
+                    Latitude = currentUserLocation.Latitude;
+                    Longitude = currentUserLocation.Longitude;
+                }
+            }
+            LocationChanged.Invoke(new Location { Latitude = Latitude, Longitude = Longitude });
+        }
+        catch (Exception ex)
+        {
+            Error = "An error occurred: " + ex.Message;
+            return;
+        }
+    }
     
     /**
      * Upload the images from the gallery.
