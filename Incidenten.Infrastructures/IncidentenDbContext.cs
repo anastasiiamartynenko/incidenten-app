@@ -9,6 +9,7 @@ public class IncidentenDbContext : DbContext
     public DbSet<User> Users { get; set; }
     public DbSet<Incident> Incidents { get; set; }
     public DbSet<IncidentImage> IncidentImages { get; set; }
+    public DbSet<IncidentLocation> IncidentLocations { get; set; }
     
     public IncidentenDbContext(DbContextOptions<IncidentenDbContext> options)
         : base(options) { }
@@ -46,8 +47,16 @@ public class IncidentenDbContext : DbContext
             .WithOne(i => i.Incident)
             .HasForeignKey(i => i.IncidentId)
             .OnDelete(DeleteBehavior.Restrict);
+        modelBuilder.Entity<Incident>()
+            .ToTable("incidents")
+            .HasOne(i => i.Location)
+            .WithOne(i => i.Incident)
+            .HasForeignKey<IncidentLocation>(i => i.IncidentId);
         modelBuilder
             .Entity<IncidentImage>()
             .ToTable("incident_images");
+        modelBuilder
+            .Entity<IncidentLocation>()
+            .ToTable("incident_locations");
     }
 }

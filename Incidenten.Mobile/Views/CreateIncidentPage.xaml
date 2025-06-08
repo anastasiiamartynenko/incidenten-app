@@ -2,6 +2,7 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="http://schemas.microsoft.com/dotnet/2021/maui/maps"
              x:Class="Incidenten.Mobile.Views.CreateIncidentPage">
     <ContentPage.Content>
         <VerticalStackLayout Padding="40" Spacing="15">
@@ -50,6 +51,15 @@
                         </DataTemplate>
                     </CollectionView.ItemTemplate>
                 </CollectionView>
+            </VerticalStackLayout>
+            
+            <!-- A map to display the location of the incident -->
+            <VerticalStackLayout>
+                <maps:Map
+                    x:Name="IncidentMap"
+                    HeightRequest="300" 
+                    MapType="Street" 
+                    IsShowingUser="True" />
             </VerticalStackLayout>
             
             <!-- Error message -->

@@ -4,6 +4,36 @@
         <name>Incidenten.Mobile</name>
     </assembly>
     <members>
+        <member name="M:Incidenten.Mobile.Services.LocationService.GetCurrentLocation">
+            Get the current location of the user.
+        </member>
+        <member name="M:Incidenten.Mobile.Services.LocationService.CancelRequest">
+            Cancel the location request.
+        </member>
+        <member name="M:Incidenten.Mobile.Services.LocationService.CalculateDistance(Incidenten.Domain.IncidentLocation,Incidenten.Domain.IncidentLocation)">
+            Calculate the distance between 2 locations in km.
+        </member>
+        <member name="M:Incidenten.Mobile.Services.PermissionsService.CheckAndRequestCameraPermission">
+            Check and request camera permissions.
+        </member>
+        <member name="M:Incidenten.Mobile.Services.PermissionsService.CheckAndRequestLocationPermission">
+            Check and request location permissions.
+        </member>
+        <member name="M:Incidenten.Mobile.Services.PermissionsService.IsCameraPermissionGranted">
+            Check camera permission.
+        </member>
+        <member name="M:Incidenten.Mobile.Services.PermissionsService.IsLocationPermissionGranted">
+            Check location permissions.
+        </member>
+        <member name="M:Incidenten.Mobile.ViewModels.CreateIncidentViewModel.UploadFromGallery">
+            Upload the images from the gallery.
+        </member>
+        <member name="M:Incidenten.Mobile.ViewModels.CreateIncidentViewModel.HandleLocationChanges(Microsoft.Maui.Devices.Sensors.Location)">
+            Handle location changes.
+        </member>
+        <member name="M:Incidenten.Mobile.ViewModels.CreateIncidentViewModel.CreateIncident">
+            Create an incident.
+        </member>
         <member name="T:Incidenten.Mobile.Resource">
             <summary>
             Android Resource Designer class.

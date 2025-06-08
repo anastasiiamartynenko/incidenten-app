@@ -19,4 +19,13 @@ public class PermissionsService
     {
         return await Permissions.CheckStatusAsync<Permissions.Camera>() == PermissionStatus.Granted;
     }
+
+    /**
+     * Check location permissions.
+     */
+    public async Task<bool> IsLocationPermissionGranted()
+    {
+        return await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>() == PermissionStatus.Granted
+            || await Permissions.CheckStatusAsync<Permissions.LocationAlways>() == PermissionStatus.Granted;
+    }
 }

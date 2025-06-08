@@ -21,6 +21,7 @@ public class Incident : _Base
     public User? Executor { get; set; }
     
     public List<IncidentImage> Images { get; set; } = new();
+    public IncidentLocation? Location { get; set; } = null!;
 
     [NotMapped] public string FirstImageUrl => Images.FirstOrDefault() is { Filename: var name }
         ? $"http://localhost:5000/images/{Images.FirstOrDefault()?.Filename}"

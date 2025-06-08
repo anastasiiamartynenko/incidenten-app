@@ -23,4 +23,9 @@ public interface IIncidentApi
     Task UploadImages(
         Guid id,
         [AliasAs("images")] IEnumerable<StreamPart> images);
+    
+    [Post("/incidentLocation/{id}")]
+    Task ProvideIncidentLocation(
+        Guid id,
+        [Body] ProvideIncidentLocationRequest incidentLocation);
 }
