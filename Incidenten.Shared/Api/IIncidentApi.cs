@@ -8,6 +8,9 @@ public interface IIncidentApi
 {
     [Post("/incident")]
     Task<Incident> CreateIncident([Body] CreateIncidentRequest incident);
+    
+    [Get("/incident/data/{id}")]
+    Task<Incident?> GetIncident(Guid id);
 
     [Get("/incident/my/reported")]
     Task<List<Incident>> GetMyReportedIncidents();

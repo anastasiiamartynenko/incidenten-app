@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="http://schemas.microsoft.com/dotnet/2021/maui/maps"
+             x:Class="Incidenten.Mobile.Views.IncidentDetailsPage">
+    <ContentPage.Content>
+        <VerticalStackLayout Padding="40, 0, 40, 0" Spacing="15">
+            <Label 
+                Text="{Binding Error}" 
+                TextColor="Red" 
+                FontSize="12" 
+                IsVisible="{Binding Error, Converter={StaticResource StringNotEmpty}}" />
+            
+            <FlexLayout Direction="Row" AlignItems="Center" JustifyContent="SpaceBetween" Wrap="Wrap">
+                <!-- Name -->
+                <Label 
+                    Text="{Binding Name}" 
+                    FontAttributes="Bold"
+                    FontSize="24" />
+                
+                <!-- Created at -->
+                <Label 
+                    Text="{Binding CreatedAt}"
+                    FontSize="12"
+                    TextColor="DimGray"
+                    FontAttributes="Italic" />
+            </FlexLayout>
+            
+            <!-- Images -->
+            <CarouselView 
+                ItemsSource="{Binding Images}" 
+                Loop="False">
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Image
+                            Source="{Binding}"
+                            HeightRequest="240" />
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            
+            <!-- Description -->
+            <Label Text="{Binding Description}" FontSize="14" />
+            
+            <VerticalStackLayout>
+                <!-- Status -->
+                <HorizontalStackLayout>
+                    <Label Text="Status: " FontAttributes="Bold" />
+                    <Label Text="{Binding Status}" />
+                </HorizontalStackLayout>
+            
+                <!-- Priority -->
+                <HorizontalStackLayout>
+                    <Label Text="Priority: " FontAttributes="Bold" />
+                    <Label Text="{Binding Priority}" />
+                </HorizontalStackLayout>
+                
+                <!-- Created at -->
+                <HorizontalStackLayout>
+                    <Label Text="Created at: " FontAttributes="Bold" />
+                    <Label Text="{Binding CreatedAt}" />
+                </HorizontalStackLayout>
+                
+                <!-- Updated at --> 
+                <HorizontalStackLayout IsVisible="{Binding UpdatedAt, Converter={StaticResource StringNotEmpty}}">
+                    <Label Text="Deadline at: " FontAttributes="Bold" />
+                    <Label Text="{Binding UpdatedAt}" />
+                </HorizontalStackLayout>
+                
+                <!-- Deadline at -->
+                <HorizontalStackLayout IsVisible="{Binding DeadlineAt, Converter={StaticResource StringNotEmpty}}">
+                    <Label Text="Deadline at: " FontAttributes="Bold" />
+                    <Label Text="{Binding DeadlineAt}" />
+                </HorizontalStackLayout>
+                
+                <!-- Completed at -->
+                <HorizontalStackLayout IsVisible="{Binding CompletedAt, Converter={StaticResource StringNotEmpty}}">
+                    <Label Text="Completed at: " FontAttributes="Bold" />
+                    <Label Text="{Binding CompletedAt}" />
+                </HorizontalStackLayout>
+            </VerticalStackLayout>
+            
+            <!-- A map to display the location of the incident -->
+            <VerticalStackLayout>
+                <Label Text="Location" FontAttributes="Bold" />
+                <maps:Map
+                    x:Name="IncidentMap"
+                    HeightRequest="200" 
+                    MapType="Street"  />
+            </VerticalStackLayout>
+            
+            <FlexLayout Margin="0,15,0,0" Direction="Row" AlignItems="Center" JustifyContent="SpaceBetween">
+                <!-- Delete button -->
+                <Button 
+                    Text="Delete" 
+                    ImageSource="delete.png"
+                    BackgroundColor="Red"
+                    TextColor="White" />
+                
+                <!-- Update button -->
+                <Button
+                    Text="Update" 
+                    ImageSource="update.png"
+                    BackgroundColor="Green"
+                    TextColor="White" />
+            </FlexLayout>
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>

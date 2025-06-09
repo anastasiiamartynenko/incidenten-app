@@ -1,3 +1,4 @@
+using System.Windows.Input;
 using Incidenten.Domain;
 using Incidenten.Shared.Api;
 
@@ -31,4 +32,11 @@ public class MyReportedIncidentsViewModel : _BaseViewModel
             Error = "An error occurred: " + ex.Message;
         }
     }
+    
+    
+
+    public ICommand GoToDetailsCommand => new Command<Guid>(async (id) =>
+    {
+        await Shell.Current.GoToAsync($"IncidentDetailsPage?id={id}");
+    });
 }

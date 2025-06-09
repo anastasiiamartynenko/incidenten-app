@@ -1030,3 +1030,5 @@ D:\c#\IncidentenApp\Incidenten.Mobile\obj\Debug\net9.0-android\stamp\_ConvertRes
 D:\c#\IncidentenApp\Incidenten.Mobile\obj\Debug\net9.0-android\stamp\_GenerateJavaStubs.stamp
 D:\c#\IncidentenApp\Incidenten.Mobile\obj\Debug\net9.0-android\stamp\_GeneratePackageManagerJava.stamp
 D:\c#\IncidentenApp\Incidenten.Mobile\obj\Debug\net9.0-android\stamp\_ResolveLibraryProjectImports.stamp
+D:\c#\IncidentenApp\Incidenten.Mobile\obj\Debug\net9.0-android\resizetizer\r\drawable\update.png
+D:\c#\IncidentenApp\Incidenten.Mobile\obj\Debug\net9.0-android\resizetizer\r\drawable\delete.png
