@@ -55,6 +55,12 @@ build_metadata.AdditionalFiles.ManifestResourceName = Incidenten.Mobile.Views.Cr
 build_metadata.AdditionalFiles.TargetPath = Views\CreateIncidentPage.xaml
 build_metadata.AdditionalFiles.RelativePath = Views\CreateIncidentPage.xaml
 
+[D:/c\#/IncidentenApp/Incidenten.Mobile/Views/IncidentDetailsPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = Incidenten.Mobile.Views.IncidentDetailsPage.xaml
+build_metadata.AdditionalFiles.TargetPath = Views\IncidentDetailsPage.xaml
+build_metadata.AdditionalFiles.RelativePath = Views\IncidentDetailsPage.xaml
+
 [D:/c\#/IncidentenApp/Incidenten.Mobile/Views/LoginPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = Incidenten.Mobile.Views.LoginPage.xaml

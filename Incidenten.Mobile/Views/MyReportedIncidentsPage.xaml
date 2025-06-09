@@ -4,10 +4,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Incidenten.Mobile.Views.MyReportedIncidentsPage">
     <ContentPage.Content>
-        <CollectionView ItemsSource="{Binding Incidents}">
+        <CollectionView x:Name="MyReportedIncidentsCollectionView" ItemsSource="{Binding Incidents}">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Border Padding="10" Margin="5">
+                        <Border.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                Command="{Binding BindingContext.GoToDetailsCommand, Source={x:Reference MyReportedIncidentsCollectionView}}"
+                                CommandParameter="{Binding Id}" />
+                        </Border.GestureRecognizers>
+                        
                         <HorizontalStackLayout>
                             <!-- First image associated with an incident -->
                             <Image 

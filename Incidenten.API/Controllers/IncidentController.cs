@@ -50,6 +50,41 @@ public class IncidentController(IncidentenDbContext db, IConfiguration configura
     }
 
     /**
+     * Get an incident by its ID.
+     */
+    [Authorize]
+    [HttpGet("data/{id}")]
+    public async Task<IActionResult> GetIncident(Guid? id)
+    {
+        // Get user's email and find the user in the DB.
+        var email = User.Identity?.Name;
+        var user = await db.Users.FirstOrDefaultAsync(u => u.Email == email);
+
+        // If no user was found, return the Unauthorized response.
+        if (user == null) return Unauthorized();
+
+        // Find the corresponding incident and populate all the relevant data.
+        var incident = await db.Incidents
+            .Include(i => i.Images)
+            .Include(i => i.Location)
+            .Include(i => i.Reporter)
+            .Include(i => i.Executor)
+            .FirstOrDefaultAsync(i => i.Id == id);
+        
+        // Make sure the incident exists.
+        if (incident == null) return NotFound();
+        
+        // Make sure the user is allowed to access the incident data.
+        if (user.Role == UserRole.Employee || user.Role == UserRole.Official || incident.ReporterId == user.Id)
+        {
+            return Ok(incident);
+        }
+
+        // In all the rest cases, return the Unauthorized response.
+        return Unauthorized();
+    }
+
+    /**
      * Get the incidents reported by the user.
      */
     [Authorize]

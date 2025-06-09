@@ -27,6 +27,7 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute("SignupPage", typeof(SignupPage));
 		Routing.RegisterRoute("UserPage", typeof(UserPage));
 		Routing.RegisterRoute("CreateIncidentPage", typeof(CreateIncidentPage));
+		Routing.RegisterRoute("IncidentDetailsPage", typeof(IncidentDetailsPage));
 	}
 
 	private void AuthChanged()
