@@ -14,13 +14,20 @@ namespace Incidenten.API.Controllers;
 public class IncidentController(IncidentenDbContext db, IConfiguration configuration) : Controller
 {
     /**
+     * A helper function to get the user by email.
+     */
+    private async Task<User?> GetUserByEmail(string? email)
+    {
+        return await db.Users.FirstOrDefaultAsync(u => u.Email == email);
+    }
+    
+    /**
      * Create a new incident.
      */
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateIncidentRequest request)
     {
-        var email = User.Identity?.Name;
-        var user = await db.Users.FirstOrDefaultAsync(u => u.Email == email);
+        var user = await GetUserByEmail(User.Identity?.Name);
 
         // If the user is not attached to the request, try to create an incident with ANONYM reporter.
         if (user == null)
@@ -57,8 +64,7 @@ public class IncidentController(IncidentenDbContext db, IConfiguration configura
     public async Task<IActionResult> GetIncident(Guid? id)
     {
         // Get user's email and find the user in the DB.
-        var email = User.Identity?.Name;
-        var user = await db.Users.FirstOrDefaultAsync(u => u.Email == email);
+        var user = await GetUserByEmail(User.Identity?.Name);
 
         // If no user was found, return the Unauthorized response.
         if (user == null) return Unauthorized();
@@ -85,14 +91,120 @@ public class IncidentController(IncidentenDbContext db, IConfiguration configura
     }
 
     /**
+     * Returns true if the user has the Update/Delete permissions regarding the specific incident.
+     */
+    private async Task<bool> DoesHaveUdPermissions(string? email, Guid incidentId)
+    {
+        // Get incident.
+        var incident = await db.Incidents
+            .FirstOrDefaultAsync(i => i.Id == incidentId);
+        
+        // Get user and make sure they exists.
+        var user = await GetUserByEmail(email);
+        if (user == null) return false;
+        
+        // Check whether the user is citizen and has reported the incident.
+        var isCitizen = user.Role == UserRole.Citizen && incident?.ReporterId == user.Id;
+        // Check whether the user is employee or official.
+        var isEmployeeOrOfficial = user.Role == UserRole.Employee || user.Role == UserRole.Official;
+        
+        // Return true only if user has these properties.
+        if (!isCitizen && !isEmployeeOrOfficial) return false;
+        return true;
+    }
+ 
+    /**
+     * Update the incident.
+     */
+    [Authorize]
+    [HttpPut("{id}")]
+    public async Task<IActionResult> UpdateIncident(Guid id, [FromBody] UpdateIncidentRequest request)
+    {
+        // Make sure the user has the Update/Delete permissions regarding this incident.
+        var doesHaveUdPermissions = await DoesHaveUdPermissions(User.Identity?.Name, id);
+        var incident = await db.Incidents.FirstOrDefaultAsync(i => i.Id == id);
+        
+        if (incident == null) return NotFound();
+        
+        if (doesHaveUdPermissions)
+        {
+            // Update the incident properties.
+            if (request.Name != null) incident.Name = request.Name;
+            if (request.Description != null) incident.Description = request.Description;
+            
+            // Save the changes to the DB and return nothing.
+            await db.SaveChangesAsync();
+            return Ok();
+        }
+        
+        // Throw unauthorized exception in all the rest cases.
+        return Unauthorized();
+    }
+
+    /**
+     * Delete the incident.
+     */
+    [Authorize]
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> DeleteIncident(Guid id)
+    {
+        // Make sure the user has the Update/Delete permissions regarding this incident.
+        var doesHaveUdPermissions = await DoesHaveUdPermissions(User.Identity?.Name, id);
+        
+        // Get the incident.
+        var incident = await db.Incidents
+            .Include(i => i.Images)
+            .Include(i => i.Location)
+            .FirstOrDefaultAsync(i => i.Id == id);
+        
+        // Make sure the incident can be deleted.
+        if (incident == null) return NotFound();
+        if (!doesHaveUdPermissions) return Unauthorized();
+        if (incident.Status != IncidentStatus.Open) 
+            return BadRequest("An incident can only be deleted if it is opened.");
+        
+        var images = incident.Images;
+        
+        // Clear up the image records.
+        foreach (var image in incident.Images)
+        {
+            db.IncidentImages.Remove(image);
+        }
+        // Delete the location record.
+        if (incident.Location != null) db.IncidentLocations.Remove(incident.Location);
+        
+        // Delete the incident.
+        db.Incidents.Remove(incident);
+        // Persist the changes in the DB.
+        await db.SaveChangesAsync();
+        
+        // Get the images directory.
+        // TODO: code refactor.
+        var imagesDirectory = Path.Combine(Directory.GetCurrentDirectory(), "Uploads");
+        
+        // Delete all the images attached to the incident from the corresponding Uploads directory.
+        foreach (var image in images)
+        {
+            var filePath = Path.Combine(imagesDirectory, image.Filename);
+
+            if (System.IO.File.Exists(filePath))
+            {
+                System.IO.File.Delete(filePath);
+            }
+        }
+        
+        // Return nothing.
+        return Ok();
+    }
+
+    /**
      * Get the incidents reported by the user.
      */
     [Authorize]
     [HttpGet("my/reported")]
     public async Task<IActionResult> GetMyReportedIncidents()
     {
-        var email = User.Identity?.Name;
-        var user = await db.Users.FirstOrDefaultAsync(u => u.Email == email);
+        var user = await GetUserByEmail(User.Identity?.Name);
 
         // The endpoint should only be available for the authorized users.
         if (user == null || user.Role == UserRole.Anonym) return Unauthorized();
@@ -112,8 +224,7 @@ public class IncidentController(IncidentenDbContext db, IConfiguration configura
     [HttpGet("my/assigned")]
     public async Task<IActionResult> GetMyAssignedIncidents()
     {
-        var email = User.Identity?.Name;
-        var user = await db.Users.FirstOrDefaultAsync(u => u.Email == email);
+        var user = await GetUserByEmail(User.Identity?.Name);
 
         // The endpoint should only be available for the employees.
         if (user is not { Role: UserRole.Employee }) return Unauthorized();
@@ -135,8 +246,7 @@ public class IncidentController(IncidentenDbContext db, IConfiguration configura
         [FromQuery] IncidentStatus? status,
         [FromQuery] IncidentPriority? priority)
     {
-        var email = User.Identity?.Name;
-        var user = await db.Users.FirstOrDefaultAsync(u => u.Email == email);
+        var user = await GetUserByEmail(User.Identity?.Name);
 
         // The endpoint should only be available for the employees and officials.
         if (user is not { Role: UserRole.Employee } && user is not { Role: UserRole.Official }) 

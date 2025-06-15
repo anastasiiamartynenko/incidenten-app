@@ -3,77 +3,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:maps="http://schemas.microsoft.com/dotnet/2021/maui/maps"
+             xmlns:components="clr-namespace:Incidenten.Mobile.Components"
              x:Class="Incidenten.Mobile.Views.CreateIncidentPage">
     <ContentPage.Content>
-        <VerticalStackLayout Padding="40" Spacing="15">
-            <Label Text="Create an incident" FontSize="20" />
-            
-            <!-- Name of the incident -->
-            <Entry 
-                Text="{Binding Name}" 
-                Placeholder="Name" />
-            
-            <!-- Description of the incident -->
-            <Entry 
-                Text="{Binding Description}" 
-                Placeholder="Description" />
-            
-            <!-- Images upload section -->
-            <VerticalStackLayout HorizontalOptions="Center">
-                <Label Text="Upload images" />
-                
-                <HorizontalStackLayout>
-                    <!-- Upload from gallery button -->
-                    <Button 
-                        Text="From gallery" 
-                        ImageSource="gallery.png" 
-                        Command="{Binding UploadFromGalleryCommand}" 
-                        Margin="0,5,5,5" />
-                    
-                    <!-- Upload from camera button -->
-                    <Button 
-                        Text="From camera" 
-                        ImageSource="camera.png" 
-                        Command="{Binding UploadFromCameraCommand}"
-                        Margin="0,5,0,5" />
-                </HorizontalStackLayout>
-                
-                <!-- Uploaded images display -->
-                <CollectionView ItemsSource="{Binding Images}" ItemsLayout="HorizontalList">
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Image 
-                                Source="{Binding Source}" 
-                                HeightRequest="100" 
-                                WidthRequest="100" 
-                                Margin="5"
-                                Aspect="AspectFill" />
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </VerticalStackLayout>
-            
-            <!-- A map to display the location of the incident -->
-            <VerticalStackLayout>
-                <maps:Map
-                    x:Name="IncidentMap"
-                    HeightRequest="300" 
-                    MapType="Street" 
-                    IsShowingUser="True" />
-            </VerticalStackLayout>
-            
-            <!-- Error message -->
-            <Label 
-                Text="{Binding Error}" 
-                TextColor="Red" 
-                FontSize="12" 
-                IsVisible="{Binding Error, Converter={StaticResource StringNotEmpty}}" />
-            
-            <!-- Create an incident button -->
-            <Button 
-                Text="Create"
-                Command="{Binding CreateIncidentCommand}"
-                Width="200" />
-        </VerticalStackLayout>
+        <components:IncidentForm BindingContext="{Binding}"></components:IncidentForm>
     </ContentPage.Content>
 </ContentPage>

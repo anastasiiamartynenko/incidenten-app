@@ -1,5 +1,6 @@
 ﻿using Incidenten.Mobile.Services;
 using Incidenten.Mobile.ViewModels;
+using Incidenten.Mobile.Views;
 using Incidenten.Shared.Api;
 using Microsoft.Extensions.Logging;
 using Refit;
@@ -55,6 +56,8 @@ public static class MauiProgram
 		builder.Services.AddTransient<UserViewModel>();
 
 		builder.Services.AddTransient<CreateIncidentViewModel>();
+		builder.Services.AddTransient<UpdateIncidentViewModel>();
+		builder.Services.AddTransient<UpdateIncidentPage>();
 		builder.Services.AddTransient<MyReportedIncidentsViewModel>();
 		builder.Services.AddTransient<IncidentDetailsViewModel>();
 

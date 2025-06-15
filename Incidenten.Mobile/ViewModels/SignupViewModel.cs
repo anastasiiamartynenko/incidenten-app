@@ -19,44 +19,21 @@ public class SignupViewModel : _BaseViewModel
         SignupCommand = new Command(async () => await SignUp());
     }
     
+    /* Fields */
+    // Fullname
     private string _fullName = String.Empty;
-
-    public string FullName
-    {
-        get => _fullName;
-        set
-        {
-            _fullName = value;
-            OnPropertyChanged();
-        }
-    }
-    
+    public string FullName { get => _fullName; set => SetProperty(ref _fullName, value); }
+    // Email
     private string _email = String.Empty;
-
-    public string Email
-    {
-        get => _email;
-        set
-        {
-            _email = value;
-            OnPropertyChanged();
-        }
-    }
-    
+    public string Email { get => _email; set => SetProperty(ref _email, value); }
+    // Password
     private string _password = String.Empty;
-
-    public string Password
-    {
-        get => _password;
-        set
-        {
-            _password = value;
-            OnPropertyChanged();
-        }
-    }
+    public string Password { get => _password; set => SetProperty(ref _password, value); }
     
-    public ICommand SignupCommand { get; }
-
+    /* Methods */
+    /**
+     * Sign up the user.
+     */
     private async Task SignUp()
     {
         Error = String.Empty;
@@ -105,4 +82,7 @@ public class SignupViewModel : _BaseViewModel
             Error = "An error occurred:" + ex.Message;
         }
     }
+    
+    /* Commands */
+    public ICommand SignupCommand { get; }
 }
