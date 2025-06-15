@@ -11,6 +11,12 @@ public interface IIncidentApi
     
     [Get("/incident/data/{id}")]
     Task<Incident?> GetIncident(Guid id);
+    
+    [Put("/incident/{id}")]
+    Task UpdateIncident(Guid id, [Body] UpdateIncidentRequest request);
+    
+    [Delete("/incident/{id}")]
+    Task DeleteIncident(Guid id);
 
     [Get("/incident/my/reported")]
     Task<List<Incident>> GetMyReportedIncidents();
@@ -24,6 +30,12 @@ public interface IIncidentApi
     [Multipart]
     [Post("/incidentImage/{id}")]
     Task UploadImages(
+        Guid id,
+        [AliasAs("images")] IEnumerable<StreamPart> images);
+
+    [Multipart]
+    [Put("/incidentImage/{id}")]
+    Task UpdateImages(
         Guid id,
         [AliasAs("images")] IEnumerable<StreamPart> images);
     

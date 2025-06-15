@@ -16,45 +16,26 @@ public class UserViewModel : _BaseViewModel
         LoadData();
     }
     
+    /* Fields */
+    // Full name
     private string _fullName = string.Empty;
-
-    public string FullName
-    {
-        get => _fullName;
-        set 
-        {
-            _fullName = value;
-            OnPropertyChanged();
-        }
-    }
-
+    public string FullName { get => _fullName; set => SetProperty(ref _fullName, value); }
+    // Email
     private string _email = string.Empty;
-    public string Email
-    {
-        get => _email;
-        set
-        {
-            _email = value;
-            OnPropertyChanged();
-        }
-    }
-    
+    public string Email { get => _email; set => SetProperty(ref _email, value); }
+    // Role of the user
     private UserRole _role = UserRole.Anonym;
+    public UserRole Role { get => _role; set => SetProperty(ref _role, value); }
 
-    public UserRole Role
-    {
-        get => _role;
-        set
-        {
-            _role = value;
-            OnPropertyChanged();
-        }
-    }
-
+    /* Methods */
+    /**
+     * Load the user data from the backend.
+     */
     public async void LoadData()
     {
         try
         {
+            // Load the user data and store it in the fields.
             var user = await _userApi.GetMe();
             FullName = user.FullName;
             Email = user.Email;
@@ -67,9 +48,14 @@ public class UserViewModel : _BaseViewModel
         }
     }
 
+    /*
+     * Log out the user.
+     */
     public void Logout()
     {
+        // Remove the token from the local storage.
         _authService.RemoveToken();
+        // Redirect the user to the main page.
         Shell.Current.GoToAsync("//MainPage");
     }
 }

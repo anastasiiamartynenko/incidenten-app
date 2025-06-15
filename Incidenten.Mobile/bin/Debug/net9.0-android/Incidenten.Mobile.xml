@@ -28,14 +28,38 @@
         <member name="M:Incidenten.Mobile.Services.PermissionsService.IsLocationPermissionGranted">
             Check location permissions.
         </member>
-        <member name="M:Incidenten.Mobile.ViewModels.CreateIncidentViewModel.UploadFromGallery">
-            Upload the images from the gallery.
+        <member name="M:Incidenten.Mobile.ViewModels.BaseIncidentFormViewModel.UploadFromGallery">
+            Exceptions-safe upload from gallery method.
         </member>
-        <member name="M:Incidenten.Mobile.ViewModels.CreateIncidentViewModel.HandleLocationChanges(Microsoft.Maui.Devices.Sensors.Location)">
-            Handle location changes.
+        <member name="M:Incidenten.Mobile.ViewModels.BaseIncidentFormViewModel.UploadFromCamera">
+            Exceptions-safe upload from camera method.
         </member>
         <member name="M:Incidenten.Mobile.ViewModels.CreateIncidentViewModel.CreateIncident">
             Create an incident.
+        </member>
+        <member name="M:Incidenten.Mobile.ViewModels.Handlers.ImageHandler.UploadFromGallery">
+            Upload the images from the gallery.
+        </member>
+        <member name="M:Incidenten.Mobile.ViewModels.IncidentDetailsViewModel.LoadData(System.Guid)">
+            Load incident data from the backend
+        </member>
+        <member name="M:Incidenten.Mobile.ViewModels.LoginViewModel.Login">
+            Log in the user.
+        </member>
+        <member name="M:Incidenten.Mobile.ViewModels.MyReportedIncidentsViewModel.LoadData">
+            Load the incidents reported by the user from the backend.
+        </member>
+        <member name="M:Incidenten.Mobile.ViewModels.SignupViewModel.SignUp">
+            Sign up the user.
+        </member>
+        <member name="M:Incidenten.Mobile.ViewModels.UpdateIncidentViewModel.LoadData(System.Guid)">
+            Load the incident data from the backend.
+        </member>
+        <member name="M:Incidenten.Mobile.ViewModels.UpdateIncidentViewModel.UpdateIncident">
+            Update the incident.
+        </member>
+        <member name="M:Incidenten.Mobile.ViewModels.UserViewModel.LoadData">
+            Load the user data from the backend.
         </member>
         <member name="T:Incidenten.Mobile.Resource">
             <summary>

@@ -19,31 +19,18 @@ public class LoginViewModel : _BaseViewModel
         LoginCommand = new Command(async () => await Login());
     }
 
+    /* Fields */
+    // Email
     private string _email = String.Empty;
-    public string Email
-    {
-        get => _email;
-        set
-        {
-            _email = value;
-            OnPropertyChanged();
-        }
-    }
-    
-    
+    public string Email { get => _email; set => SetProperty(ref _email, value); }
+    // Password
     private string _password = String.Empty;
-    public string Password
-    {
-        get => _password;
-        set
-        {
-            _password = value;
-            OnPropertyChanged();
-        }
-    }
+    public string Password { get => _password; set => SetProperty(ref _password, value); }
     
-    public ICommand LoginCommand { get; }
-
+    /* Methods */
+    /**
+     * Log in the user.
+     */
     private async Task Login()
     {
         Error = string.Empty;
@@ -78,4 +65,7 @@ public class LoginViewModel : _BaseViewModel
             Error = "An error occurred:" + ex.Message;
         }
     }
+    
+    /* Commands */
+    public ICommand LoginCommand { get; }
 }

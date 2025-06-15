@@ -2,17 +2,15 @@ using Incidenten.Domain;
 
 namespace Incidenten.Mobile.Services;
 
-// TODO: might be helpful for the future use.
-//       If it is not, then remove. 
-public class LocationService
+public static class LocationService
 {
-    private CancellationTokenSource? _cancellationTokenSource;
-    private bool _isCheckingLocation;
+    private static CancellationTokenSource? _cancellationTokenSource;
+    private static bool _isCheckingLocation;
     
     /**
      * Get the current location of the user.
      */
-    public async Task<IncidentLocation?> GetCurrentLocation()
+    public static async Task<IncidentLocation?> GetCurrentLocation()
     {
         _isCheckingLocation = true;
         GeolocationRequest request = new GeolocationRequest(
@@ -33,7 +31,7 @@ public class LocationService
     /**
      * Get the last known location of the user.
      */
-    public async Task<IncidentLocation?> GetLastKnownLocation()
+    public static async Task<IncidentLocation?> GetLastKnownLocation()
     {
         _isCheckingLocation = true;
         Location? location = await Geolocation.Default.GetLastKnownLocationAsync();
@@ -45,7 +43,7 @@ public class LocationService
     /**
      * Cancel the location request.
      */
-    public void CancelRequest()
+    public static void CancelRequest()
     {
         if (_isCheckingLocation && _cancellationTokenSource is { IsCancellationRequested: false })
         {
@@ -56,7 +54,7 @@ public class LocationService
     /**
      * Calculate the distance between 2 locations in km.
      */
-    public double CalculateDistance(IncidentLocation location1Raw, IncidentLocation location2Raw)
+    public static double CalculateDistance(IncidentLocation location1Raw, IncidentLocation location2Raw)
     {
         Location location1 = new Location(location1Raw.Latitude, location1Raw.Longitude);
         Location location2 = new Location(location2Raw.Latitude, location2Raw.Longitude);

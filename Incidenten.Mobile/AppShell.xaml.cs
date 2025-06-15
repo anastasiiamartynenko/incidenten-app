@@ -28,6 +28,7 @@ public partial class AppShell : Shell
 		Routing.RegisterRoute("UserPage", typeof(UserPage));
 		Routing.RegisterRoute("CreateIncidentPage", typeof(CreateIncidentPage));
 		Routing.RegisterRoute("IncidentDetailsPage", typeof(IncidentDetailsPage));
+		Routing.RegisterRoute("UpdateIncidentPage", typeof(UpdateIncidentPage));
 	}
 
 	private void AuthChanged()
@@ -69,6 +70,8 @@ public partial class AppShell : Shell
 				Route = "MyReportedIncidentsPage",
 				Items = { content }
 			};
+			var existing = Items.FirstOrDefault(i => i.Route == "MyReportedIncidentsPage");
+			if (existing != null) Items.Remove(existing);
 			toAdd.Add(myIncidents);
 		}
 
@@ -78,7 +81,7 @@ public partial class AppShell : Shell
 		}
 	}
 
-	private async void AddConditionalMenuItems()
+	public async void AddConditionalMenuItems()
 	{
 		var authService = _serviceProvider.GetRequiredService<AuthService>();
 		var isAuthenticated = authService.IsAuthenticated;

@@ -1,11 +1,11 @@
 namespace Incidenten.Mobile.Services;
 
-public class PermissionsService
+public static class PermissionsService
 {
     /**
      * Check and request camera permissions.
      */
-    public async Task CheckAndRequestCameraPermission()
+    public static async Task CheckAndRequestCameraPermission()
     {
         var isCameraPermissionGranted = await IsCameraPermissionGranted();
         if (!isCameraPermissionGranted)
@@ -15,7 +15,7 @@ public class PermissionsService
     /**
      * Check and request location permissions.
      */
-    public async Task CheckAndRequestLocationPermission()
+    public static async Task CheckAndRequestLocationPermission()
     {
         var isLocationPermissionGranted = await IsLocationPermissionGranted();
         if (Permissions.ShouldShowRationale<Permissions.LocationWhenInUse>())
@@ -31,7 +31,7 @@ public class PermissionsService
     /**
      * Check camera permission.
      */
-    public async Task<bool> IsCameraPermissionGranted()
+    public static async Task<bool> IsCameraPermissionGranted()
     {
         return await Permissions.CheckStatusAsync<Permissions.Camera>() == PermissionStatus.Granted;
     }
@@ -39,7 +39,7 @@ public class PermissionsService
     /**
      * Check location permissions.
      */
-    public async Task<bool> IsLocationPermissionGranted()
+    public static async Task<bool> IsLocationPermissionGranted()
     {
         return await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>() == PermissionStatus.Granted
             || await Permissions.CheckStatusAsync<Permissions.LocationAlways>() == PermissionStatus.Granted;
