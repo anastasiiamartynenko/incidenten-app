@@ -18,6 +18,14 @@ namespace Incidenten.API.Controllers;
 public class UserController(IncidentenDbContext db, IConfiguration config) : Controller
 {
     /**
+     * A helper function to get the user by email.
+     */
+    private async Task<User?> GetUserByEmail(string? email)
+    {
+        return await db.Users.FirstOrDefaultAsync(u => u.Email == email);
+    }
+    
+    /**
      * Returns the role of the user based on the email provided.
      * The algorithm can be enhanced in the future.
      */
@@ -140,5 +148,18 @@ public class UserController(IncidentenDbContext db, IConfiguration config) : Con
             return NotFound();
         
         return Ok(user);
+    }
+
+    [Authorize]
+    [HttpPut("notifications")]
+    public async Task<IActionResult> ToggleNotifications()
+    {
+        var user = await GetUserByEmail(User.Identity?.Name ?? string.Empty);
+        if (user == null) return Unauthorized();
+        
+        user.SendNotifications = !user.SendNotifications;
+        await db.SaveChangesAsync();
+        
+        return Ok();
     }
 }

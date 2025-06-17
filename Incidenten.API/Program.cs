@@ -13,6 +13,8 @@ var jwtKey = builder.Configuration["Jwt:Key"] ?? "secret_jwt_key";
 builder.Services.AddDbContext<IncidentenDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
 
+builder.Services.AddScoped<EmailService>();
+
 builder.Services.AddControllers();
 
 builder.Services.AddCors(options =>
@@ -74,5 +76,24 @@ app.UseStaticFiles(new StaticFileOptions
         Path.Combine(Directory.GetCurrentDirectory(), "Uploads")),
     RequestPath = "/images",
 });
+
+using (var scope = app.Services.CreateScope())
+{
+    await using var db = scope.ServiceProvider.GetRequiredService<IncidentenDbContext>();
+
+#pragma warning disable AccessToDisposedClosure
+    var seedActions = new List<(bool, Func<Task>)>
+    {
+        (!db.EmailTemplates.Any(), async () => await Seeder.SeedEmails(db))
+    };
+#pragma warning restore AccessToDisposedClosure
+
+    foreach (var (condition, seedAction) in seedActions)
+    {
+        if (!condition) continue;
+        await seedAction();
+        db.SaveChanges();
+    }
+}
 
 app.Run();

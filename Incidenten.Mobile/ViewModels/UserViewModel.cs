@@ -1,3 +1,4 @@
+using System.Windows.Input;
 using Incidenten.Domain.Enums;
 using Incidenten.Mobile.Services;
 using Incidenten.Shared.Api;
@@ -14,6 +15,8 @@ public class UserViewModel : _BaseViewModel
         _userApi = userApi;
         _authService = authService;
         LoadData();
+
+        ToggleNotificationsCommand = new Command(async () => await ToggleNotifications());
     }
     
     /* Fields */
@@ -26,11 +29,29 @@ public class UserViewModel : _BaseViewModel
     // Role of the user
     private UserRole _role = UserRole.Anonym;
     public UserRole Role { get => _role; set => SetProperty(ref _role, value); }
-
+    // Toggle notifications button label
+    private string _toggleNotificationsLabel = string.Empty;
+    public string ToggleNotificationsLabel { get => _toggleNotificationsLabel; set => SetProperty(ref _toggleNotificationsLabel, value); }
+    
     /* Methods */
     /**
      * Load the user data from the backend.
      */
+    public async Task ToggleNotifications()
+    {
+        Error = string.Empty;
+        try
+        {
+            await _userApi.ToggleNotifications();
+            var newLabel = ToggleNotificationsLabel == "Turn on" ? "Turn off" : "Turn on";
+            ToggleNotificationsLabel = newLabel;
+        }
+        catch (Exception ex)
+        {
+            Error = "An error occurred: " + ex.Message;
+        }
+    }
+    
     public async void LoadData()
     {
         try
@@ -40,6 +61,7 @@ public class UserViewModel : _BaseViewModel
             FullName = user.FullName;
             Email = user.Email;
             Role = user.Role;
+            ToggleNotificationsLabel = user.SendNotifications ? "Turn off" : "Turn on";
         }
         catch (Exception ex)
         {
@@ -58,4 +80,7 @@ public class UserViewModel : _BaseViewModel
         // Redirect the user to the main page.
         Shell.Current.GoToAsync("//MainPage");
     }
+    
+    /* Commands */
+    public ICommand ToggleNotificationsCommand { get; set; }
 }
