@@ -141,3 +141,6 @@ D:\c#\IncidentenApp\Incidenten.API\bin\Debug\net9.0\System.IdentityModel.Tokens.
 D:\c#\IncidentenApp\Incidenten.API\bin\Debug\net9.0\Incidenten.Shared.dll
 D:\c#\IncidentenApp\Incidenten.API\bin\Debug\net9.0\Incidenten.Shared.pdb
 D:\c#\IncidentenApp\Incidenten.API\obj\Debug\net9.0\Incidenten.API.sourcelink.json
+D:\c#\IncidentenApp\Incidenten.API\bin\Debug\net9.0\BouncyCastle.Cryptography.dll
+D:\c#\IncidentenApp\Incidenten.API\bin\Debug\net9.0\MailKit.dll
+D:\c#\IncidentenApp\Incidenten.API\bin\Debug\net9.0\MimeKit.dll

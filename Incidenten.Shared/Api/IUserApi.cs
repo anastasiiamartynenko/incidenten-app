@@ -14,4 +14,7 @@ public interface IUserApi
 
     [Get("/user/me")]
     Task<User> GetMe();
+
+    [Put("/user/notifications")]
+    Task ToggleNotifications();
 }

@@ -12,7 +12,7 @@ public interface IIncidentApi
     [Get("/incident/data/{id}")]
     Task<Incident?> GetIncident(Guid id);
     
-    [Put("/incident/{id}")]
+    [Put("/incident/upd/{id}")]
     Task UpdateIncident(Guid id, [Body] UpdateIncidentRequest request);
     
     [Delete("/incident/{id}")]

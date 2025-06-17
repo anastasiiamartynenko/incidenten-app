@@ -1,3 +1,4 @@
+using Incidenten.API.Interfaces;
 using Incidenten.Domain;
 using Incidenten.Domain.Enums;
 using Incidenten.Infrastructures;
@@ -11,7 +12,7 @@ namespace Incidenten.API.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class IncidentController(IncidentenDbContext db, IConfiguration configuration) : Controller
+public class IncidentController(IncidentenDbContext db, IConfiguration configuration, EmailService emailService) : Controller
 {
     /**
      * A helper function to get the user by email.
@@ -117,7 +118,7 @@ public class IncidentController(IncidentenDbContext db, IConfiguration configura
      * Update the incident.
      */
     [Authorize]
-    [HttpPut("{id}")]
+    [HttpPut("upd/{id}")]
     public async Task<IActionResult> UpdateIncident(Guid id, [FromBody] UpdateIncidentRequest request)
     {
         // Make sure the user has the Update/Delete permissions regarding this incident.
@@ -268,5 +269,48 @@ public class IncidentController(IncidentenDbContext db, IConfiguration configura
         // Return the filtered incidents.
         var incidents = await query.ToListAsync();
         return Ok(incidents);
+    }
+
+    private Dictionary<string, string> GetIncidentDictionary(Incident incident)
+    {
+        var dict = new Dictionary<string, string>();
+
+        foreach (var prop in typeof(Incident).GetProperties())
+        {
+            var value = prop.GetValue(incident);
+            if (value != null)
+            {
+                dict[prop.Name] = value.ToString() ?? string.Empty;
+            }
+        }
+        
+        return dict;
+    }
+    
+    [Authorize]
+    [HttpPut("status/{id}")]
+    public async Task<IActionResult> UpdateIncidentStatus(Guid id, [FromBody] UpdateIncidentStatusRequest request)
+    {
+        // TODO: implement the actual logic.
+        // var user = GetUserByEmail(User.Identity?.Name);
+        var incident = await db.Incidents
+            .Include(i => i.Reporter)
+            .FirstOrDefaultAsync(i => i.Id == id);
+        if (incident == null) return NotFound();
+
+        incident.Status = request.Status;
+
+        if (incident.Reporter.SendNotifications)
+        {
+            var templateName = configuration["Email:UpdateStatusTemplateName"];
+            var emailTemplate = await db.EmailTemplates.FirstOrDefaultAsync(t => t.Name == templateName);
+            if (emailTemplate == null) return NotFound();
+
+            emailService.SendMail(incident.Reporter.Email, emailTemplate, GetIncidentDictionary(incident));
+        }
+        
+        await db.SaveChangesAsync();
+        
+        return Ok();
     }
 }

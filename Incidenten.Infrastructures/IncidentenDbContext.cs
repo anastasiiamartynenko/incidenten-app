@@ -10,6 +10,7 @@ public class IncidentenDbContext : DbContext
     public DbSet<Incident> Incidents { get; set; }
     public DbSet<IncidentImage> IncidentImages { get; set; }
     public DbSet<IncidentLocation> IncidentLocations { get; set; }
+    public DbSet<EmailTemplate> EmailTemplates { get; set; }
     
     public IncidentenDbContext(DbContextOptions<IncidentenDbContext> options)
         : base(options) { }
@@ -29,6 +30,8 @@ public class IncidentenDbContext : DbContext
                 CreatedAt = new DateTime(2024, 01, 01, 0, 0, 0, DateTimeKind.Utc),
                 UpdatedAt = new DateTime(2024, 01, 01, 0, 0, 0, DateTimeKind.Utc),
             });
+        modelBuilder.Entity<EmailTemplate>()
+            .ToTable("email_templates");
         modelBuilder.Entity<Incident>()
             .ToTable("incidents")
             .HasOne(c => c.Reporter)

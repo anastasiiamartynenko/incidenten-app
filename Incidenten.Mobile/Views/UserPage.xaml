@@ -12,6 +12,9 @@
             <Label Text="{Binding Email}" />
             <Label Text="{Binding Role}" />
 
+            <Button 
+                Text="{Binding ToggleNotificationsLabel}" 
+                Command="{Binding ToggleNotificationsCommand}" />
             <Button Text="Log Out" Clicked="OnLogoutClicked" />
         </VerticalStackLayout>
     </ContentPage.Content>

@@ -4,6 +4,12 @@
         <name>Incidenten.Mobile</name>
     </assembly>
     <members>
+        <member name="M:Incidenten.Mobile.Services.ImageHelper.GetMimetype(System.String)">
+            Get the image mimetype.
+        </member>
+        <member name="M:Incidenten.Mobile.Services.ImageHelper.ProcessImage(Microsoft.Maui.Storage.FileResult)">
+            Convert the file result into the image model.
+        </member>
         <member name="M:Incidenten.Mobile.Services.LocationService.GetCurrentLocation">
             Get the current location of the user.
         </member>
@@ -40,6 +46,12 @@
         <member name="M:Incidenten.Mobile.ViewModels.Handlers.ImageHandler.UploadFromGallery">
             Upload the images from the gallery.
         </member>
+        <member name="M:Incidenten.Mobile.ViewModels.Handlers.ImageHandler.ToStreamParts">
+            Convert the images to stream parts in order to attach them to the multipart form request.
+        </member>
+        <member name="M:Incidenten.Mobile.ViewModels.Handlers.LocationHandler.InitializeLocation">
+            Initialize the location.
+        </member>
         <member name="M:Incidenten.Mobile.ViewModels.IncidentDetailsViewModel.LoadData(System.Guid)">
             Load incident data from the backend
         </member>
@@ -58,8 +70,11 @@
         <member name="M:Incidenten.Mobile.ViewModels.UpdateIncidentViewModel.UpdateIncident">
             Update the incident.
         </member>
-        <member name="M:Incidenten.Mobile.ViewModels.UserViewModel.LoadData">
+        <member name="M:Incidenten.Mobile.ViewModels.UserViewModel.ToggleNotifications">
             Load the user data from the backend.
+        </member>
+        <member name="M:Incidenten.Mobile.ViewModels._BaseViewModel.SetProperty``1(``0@,``0,System.String)">
+            A helper function to simplify the set property process.
         </member>
         <member name="T:Incidenten.Mobile.Resource">
             <summary>
