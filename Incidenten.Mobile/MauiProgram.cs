@@ -1,4 +1,6 @@
-﻿using Incidenten.Mobile.Services;
+﻿using System.Text.Json;
+using System.Text.Json.Serialization;
+using Incidenten.Mobile.Services;
 using Incidenten.Mobile.ViewModels;
 using Incidenten.Mobile.Views;
 using Incidenten.Shared.Api;
@@ -36,19 +38,43 @@ public static class MauiProgram
 			.ConfigureHttpClient(client =>
 			{
 				client.BaseAddress = new Uri(apiBase);
-			});
+			})
+			.ConfigurePrimaryHttpMessageHandler(() =>
+			{
+				return new LoggingHandler(new HttpClientHandler());
+			});;
 		builder.Services.AddRefitClient<IUserApi>()
 			.ConfigureHttpClient(client =>
 			{
 					client.BaseAddress = new Uri(apiBase);
 			})
-			.AddHttpMessageHandler<AuthTokenInjector>();
-		builder.Services.AddRefitClient<IIncidentApi>()
-			.ConfigureHttpClient(client =>
+			.AddHttpMessageHandler<AuthTokenInjector>()
+			.ConfigurePrimaryHttpMessageHandler(() =>
 			{
-				client.BaseAddress = new Uri(apiBase);
+				return new LoggingHandler(new HttpClientHandler());
+			});;
+		builder.Services
+			.AddRefitClient<IIncidentApi>()
+			.ConfigureHttpClient(c => c.BaseAddress = new Uri(apiBase))
+			.AddHttpMessageHandler<AuthTokenInjector>()
+			.ConfigurePrimaryHttpMessageHandler(() =>
+			{
+				return new LoggingHandler(new HttpClientHandler());
+			});
+		builder.Services.AddRefitClient<IIncidentStatusApi>(new RefitSettings
+			{
+				ContentSerializer = new SystemTextJsonContentSerializer(new JsonSerializerOptions
+				{
+					// Disable camelCase and uses PascalCase
+					PropertyNamingPolicy = null,
+				})
 			})
-			.AddHttpMessageHandler<AuthTokenInjector>();
+			.ConfigureHttpClient(c => c.BaseAddress = new Uri(apiBase))
+			.AddHttpMessageHandler<AuthTokenInjector>()
+			.ConfigurePrimaryHttpMessageHandler(() =>
+			{
+				return new LoggingHandler(new HttpClientHandler());
+			});
 		
 		// Add ViewModels.
 		builder.Services.AddTransient<LoginViewModel>();
@@ -59,6 +85,7 @@ public static class MauiProgram
 		builder.Services.AddTransient<UpdateIncidentViewModel>();
 		builder.Services.AddTransient<UpdateIncidentPage>();
 		builder.Services.AddTransient<MyReportedIncidentsViewModel>();
+		builder.Services.AddTransient<AllIncidentsViewModel>();
 		builder.Services.AddTransient<IncidentDetailsViewModel>();
 
 #if DEBUG

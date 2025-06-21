@@ -30,4 +30,14 @@ public class Incident : _Base
     [NotMapped] public string FirstImageUrlAndroid => Images.FirstOrDefault() is { Filename: var name }
         ? $"http://10.0.2.2:5000/images/{Images.FirstOrDefault()?.Filename}"
         : "http://10.0.2.2:5000/images/NO_IMAGE_PLACEHOLDER.png";
+    
+    [NotMapped]
+    public bool ShouldShowActionButton => 
+        Status is IncidentStatus.Registered or IncidentStatus.InProgress;
+
+    [NotMapped]
+    public string? ActionLabel =>
+        Status == IncidentStatus.Registered ? "Pick up" :
+        Status == IncidentStatus.InProgress ? "Complete" :
+        null;
 }

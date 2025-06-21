@@ -6,9 +6,9 @@
              x:Class="Incidenten.Mobile.Views.IncidentDetailsPage">
     <ContentPage.Content>
         <VerticalStackLayout Padding="40, 0, 40, 0" Spacing="15">
-            <Label 
-                Text="{Binding Error}" 
-                TextColor="Red" 
+            <Label
+                Text="{Binding Error}"
+                TextColor="Red"
                 FontSize="12"
                 IsVisible="{Binding Error, Converter={StaticResource StringNotEmpty}}" />
             
@@ -90,7 +90,11 @@
                     MapType="Street"  />
             </VerticalStackLayout>
             
-            <FlexLayout Margin="0,15,0,0" Direction="Row" AlignItems="Center" JustifyContent="SpaceBetween">
+            <FlexLayout 
+                Margin="0,15,0,0" 
+                Direction="Row" 
+                AlignItems="Center" 
+                JustifyContent="SpaceBetween">
                 <!-- Delete button -->
                 <Button 
                     Text="Delete" 
@@ -106,6 +110,17 @@
                     BackgroundColor="Green"
                     TextColor="White" 
                     Command="{Binding GoToUpdatePageCommand}" />
+                
+                <!-- Action button for the employee if needed -->
+                <HorizontalStackLayout IsVisible="{Binding ShowActionButton}">
+                    <Button Text="Pick up"
+                            IsVisible="{Binding EnumStatus, Converter={StaticResource ShowPickUpConverter}}"
+                            Command="{Binding PickUpCommand}" />
+                    
+                    <Button Text="Complete"
+                            IsVisible="{Binding EnumStatus, Converter={StaticResource ShowCompleteConverter}}"
+                            Command="{Binding CompleteCommand}" />
+                </HorizontalStackLayout>
             </FlexLayout>
         </VerticalStackLayout>
     </ContentPage.Content>

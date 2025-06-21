@@ -73,6 +73,13 @@ public class SignupViewModel : _BaseViewModel
             {
                 // Set token.
                 _authService.SetToken(response.Token);
+                
+                var user = await _userApi.GetMe();
+                if (user != null)
+                {
+                    _authService.SetRole(user.Role);
+                }
+                
                 // Redirect to the home page.
                 await Shell.Current.GoToAsync("//MainPage");
             }

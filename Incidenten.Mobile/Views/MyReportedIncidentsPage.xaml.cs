@@ -14,12 +14,13 @@ public partial class MyReportedIncidentsPage : ContentPage
     {
         InitializeComponent();
         _viewModel = viewModel;
-        BindingContext = viewModel;
+        BindingContext = _viewModel;
     }
 
     protected override async void OnAppearing()
     {
         base.OnAppearing();
         await _viewModel.LoadData();
+        IncidentList.SetItemsSource(_viewModel.Incidents);
     }
 }

@@ -7,6 +7,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <converters:StringNotEmptyConverter x:Key="StringNotEmpty" />
+            <converters:ShowPickUpConverter x:Key="ShowPickUpConverter" />
+            <converters:ShowCompleteConverter x:Key="ShowCompleteConverter" />
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />

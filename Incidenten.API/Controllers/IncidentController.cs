@@ -100,7 +100,7 @@ public class IncidentController(IncidentenDbContext db, IConfiguration configura
         var incident = await db.Incidents
             .FirstOrDefaultAsync(i => i.Id == incidentId);
         
-        // Get user and make sure they exists.
+        // Get user and make sure they exist.
         var user = await GetUserByEmail(email);
         if (user == null) return false;
         
@@ -265,12 +265,25 @@ public class IncidentController(IncidentenDbContext db, IConfiguration configura
         {
             query = query.Where(i => i.Priority == priority);
         }
+
+        // For employee, return only the registered / picked up / completed tasks.
+        if (user.Role == UserRole.Employee)
+        {
+            query = query.Where(i => 
+                i.Status == IncidentStatus.Completed || 
+                i.Status == IncidentStatus.Registered ||
+                i.Status == IncidentStatus.InProgress
+            );
+        }
         
         // Return the filtered incidents.
         var incidents = await query.ToListAsync();
         return Ok(incidents);
     }
 
+    /**
+     * Returns the dictionary with incident fields for the future use within the template generation.
+     */
     private Dictionary<string, string> GetIncidentDictionary(Incident incident)
     {
         var dict = new Dictionary<string, string>();
@@ -280,37 +293,114 @@ public class IncidentController(IncidentenDbContext db, IConfiguration configura
             var value = prop.GetValue(incident);
             if (value != null)
             {
+                // Add kv pair to the dictionary.
                 dict[prop.Name] = value.ToString() ?? string.Empty;
             }
         }
         
         return dict;
     }
+
+    /**
+     * Returns the deadline of the incident based on its priority.
+     */
+    private DateTime GetDeadline(IncidentPriority priority)
+    {
+        switch (priority)
+        {
+            case IncidentPriority.Low:
+                return DateTime.UtcNow.AddDays(30);
+            case IncidentPriority.Regular:
+                return DateTime.UtcNow.AddDays(7);
+            case IncidentPriority.High:
+                return DateTime.UtcNow.AddDays(1);
+        }
+        throw new Exception("Unknown priority");
+    }
     
+    /**
+     * Update the incident status.
+     */
     [Authorize]
     [HttpPut("status/{id}")]
     public async Task<IActionResult> UpdateIncidentStatus(Guid id, [FromBody] UpdateIncidentStatusRequest request)
     {
-        // TODO: implement the actual logic.
-        // var user = GetUserByEmail(User.Identity?.Name);
+        // Make sure the user exists.
+        var user = await GetUserByEmail(User.Identity?.Name);
+        if (user == null) return Unauthorized();
+        
+        // Make sure the incident exists.
         var incident = await db.Incidents
             .Include(i => i.Reporter)
             .FirstOrDefaultAsync(i => i.Id == id);
         if (incident == null) return NotFound();
 
+        /*
+         * Status flow:
+         * OPEN => REGISTERED => IN_PROGRESS => COMPLETED
+         * ----------------------------------------------
+         * Permissions:
+         * Open => Registered: Official Y
+         * Registered => Open: Official Y
+         * Registered => InProgress: Employee Y
+         * InProgress => Registered: Employee Y
+         * InProgress => Completed: Employee
+         * ----------------------------------------------
+         * Only sequential status updates are possible.
+         */
+        switch (request.Status)
+        {
+            case IncidentStatus.Open:
+                if (incident.Status != IncidentStatus.Registered) return BadRequest();
+                if (user.Role != UserRole.Official) return Unauthorized(); 
+                break;
+            case IncidentStatus.Registered:
+                if (user.Role == UserRole.Official)
+                {
+                    if (incident.Status != IncidentStatus.Open) return BadRequest();
+                    
+                    var priority = request.Priority ?? IncidentPriority.Low;
+                    incident.Priority = priority;
+                    incident.DeadlineAt = GetDeadline(priority);
+                } else if (user.Role == UserRole.Employee)
+                {
+                    if (incident.Status != IncidentStatus.Registered) return BadRequest();
+                    incident.ExecutorId = user.Id;
+                }
+                else
+                {
+                    return Unauthorized();
+                }
+                break;
+            case IncidentStatus.InProgress:
+                if (incident.Status != IncidentStatus.Registered) return BadRequest();
+                if (user.Role != UserRole.Employee) return Unauthorized();
+                break;
+            case IncidentStatus.Completed:
+                if (incident.Status != IncidentStatus.InProgress) return BadRequest();
+                if (user.Role != UserRole.Employee) return Unauthorized();
+                
+                incident.CompletedAt = DateTime.UtcNow;
+                break;
+        }
+        
+        // Update incident status if all the previous steps are successfully performed.
         incident.Status = request.Status;
 
+        // If the reporter is signed up to the notifications, make sure to send a notification to them.
         if (incident.Reporter.SendNotifications)
         {
+            // Get the email template for the update status email.
             var templateName = configuration["Email:UpdateStatusTemplateName"];
             var emailTemplate = await db.EmailTemplates.FirstOrDefaultAsync(t => t.Name == templateName);
             if (emailTemplate == null) return NotFound();
 
+            // Send the email to the incident reporter.
             emailService.SendMail(incident.Reporter.Email, emailTemplate, GetIncidentDictionary(incident));
         }
         
+        // Permit the changes to the DB and return nothing.
         await db.SaveChangesAsync();
-        
         return Ok();
     }
 }

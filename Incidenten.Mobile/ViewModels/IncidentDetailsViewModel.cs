@@ -3,24 +3,32 @@ using System.Windows.Input;
 using Incidenten.Domain;
 using Incidenten.Domain.Enums;
 using Incidenten.Shared.Api;
+using Incidenten.Shared.DTO.Incident;
 
 namespace Incidenten.Mobile.ViewModels;
 
 public class IncidentDetailsViewModel : _BaseViewModel
 {
     private readonly IIncidentApi _incidentApi;
+    private readonly IIncidentStatusApi _incidentStatusApi;
 
-    public IncidentDetailsViewModel(IIncidentApi incidentApi)
+    public IncidentDetailsViewModel(IIncidentApi incidentApi, IIncidentStatusApi incidentStatusApi)
     {
         _incidentApi = incidentApi;
+        _incidentStatusApi = incidentStatusApi;
 
         DeleteIncidentCommand = new Command(async () => await DeleteIncident());
+        PickUpCommand = new Command(async () => await PickUpIncident());
+        CompleteCommand = new Command(async () => await CompleteIncident());
     }
 
     /* Fields */
     // Id
     private Guid _incidentId;
     public Guid IncidentId { get => _incidentId; set => SetProperty(ref _incidentId, value); }
+    // Whether to show the actions buttons on the page
+    private bool _showActionButton = false;
+    public bool ShowActionButton { get => _showActionButton; set => SetProperty(ref _showActionButton, value); }
     // Name
     private string _name = string.Empty;
     public string Name { get => _name; set => SetProperty(ref _name, value); }
@@ -46,6 +54,8 @@ public class IncidentDetailsViewModel : _BaseViewModel
     private string _completedAt = string.Empty;
     public string CompletedAt { get => _completedAt; set => SetProperty(ref _completedAt, value); }
     // Status
+    private IncidentStatus _enumStatus;
+    public IncidentStatus EnumStatus { get => _enumStatus; set => SetProperty(ref _enumStatus, value); }
     private string _status = string.Empty;
     public string Status { get => _status; set => SetProperty(ref _status, value); }
     // Priority
@@ -83,6 +93,7 @@ public class IncidentDetailsViewModel : _BaseViewModel
             Priority = response.Priority.ToString();
 
             // Assign the status value.
+            EnumStatus = response.Status;
             if (response.Status == IncidentStatus.Open || response.Status == IncidentStatus.Registered)
             {
                 Status = response.Status.ToString();
@@ -142,12 +153,59 @@ public class IncidentDetailsViewModel : _BaseViewModel
         }
     }
 
+    /**
+     * Delete the incident.
+     */
     public async Task DeleteIncident()
     {
         try
         {
             await _incidentApi.DeleteIncident(IncidentId);
             await Shell.Current.GoToAsync("//MyReportedIncidentsPage");
+        }
+        catch (Exception ex)
+        {
+            Error = "An error occurred: " + ex.Message;
+        }
+    }
+
+    /**
+     * Pick up the incident.
+     */
+    public async Task PickUpIncident()
+    {
+        Error = string.Empty;
+        try
+        {
+            await _incidentStatusApi.UpdateIncidentStatus(IncidentId, new UpdateIncidentStatusRequest
+            {
+                Status = IncidentStatus.InProgress
+            });
+            Status = "In Progress";
+            EnumStatus = IncidentStatus.InProgress;
+            // await Shell.Current.GoToAsync("//MyReportedIncidentsPage");
+        }
+        catch (Exception ex)
+        {
+            Error = "An error occurred: " + ex.Message;
+        }
+    }
+
+    /**
+     * Complete the incident.
+     */
+    public async Task CompleteIncident()
+    {
+        Error = string.Empty;
+        try
+        {
+            await _incidentStatusApi.UpdateIncidentStatus(IncidentId, new UpdateIncidentStatusRequest
+            {
+                Status = IncidentStatus.Completed
+            });
+            Status = "Completed";
+            EnumStatus = IncidentStatus.Completed;
+            // await Shell.Current.GoToAsync("//MyReportedIncidentsPage");
         }
         catch (Exception ex)
         {
@@ -165,4 +223,6 @@ public class IncidentDetailsViewModel : _BaseViewModel
     });
 
     public ICommand DeleteIncidentCommand { get; }
+    public ICommand PickUpCommand { get; }
+    public ICommand CompleteCommand { get; }
 }

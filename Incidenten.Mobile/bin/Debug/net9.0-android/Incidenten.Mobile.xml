@@ -58,9 +58,6 @@
         <member name="M:Incidenten.Mobile.ViewModels.LoginViewModel.Login">
             Log in the user.
         </member>
-        <member name="M:Incidenten.Mobile.ViewModels.MyReportedIncidentsViewModel.LoadData">
-            Load the incidents reported by the user from the backend.
-        </member>
         <member name="M:Incidenten.Mobile.ViewModels.SignupViewModel.SignUp">
             Sign up the user.
         </member>

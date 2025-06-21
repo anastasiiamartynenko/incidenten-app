@@ -1,51 +1,27 @@
+using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Incidenten.Domain;
 using Incidenten.Shared.Api;
 
 namespace Incidenten.Mobile.ViewModels;
 
-public class MyReportedIncidentsViewModel : _BaseViewModel
+public class MyReportedIncidentsViewModel : BaseIncidentsViewModel
 {
     private readonly IIncidentApi _incidentApi;
 
-    public MyReportedIncidentsViewModel(IIncidentApi incidentApi)
+    public MyReportedIncidentsViewModel(IIncidentApi incidentApi) : base(incidentApi)
     {
         _incidentApi = incidentApi;
-        
-        LoadData();
+        ShowActionButton = false;
     }
-
-    /* Fields */
-    // List of incidents
-    public List<Incident> Incidents { get; set; } = new();
     
-    /*  Methods */
+    /* Methods */
     /**
-     * Load the incidents reported by the user from the backend.
+     * Fetch my reported incidents.
      */
-    public async Task LoadData()
+    protected async override Task<ObservableCollection<Incident>> FetchIncidents()
     {
-        try
-        {
-            Error = string.Empty;
-            
-            // Load the incidents and store them locally.
-            var result = await _incidentApi.GetMyReportedIncidents();
-            Incidents = result;
-            
-            // Notify the application about the incidents property changes.
-            OnPropertyChanged(nameof(Incidents));
-        }
-        catch (Exception ex)
-        {
-            Error = "An error occurred: " + ex.Message;
-        }
+        var result = await _incidentApi.GetMyReportedIncidents();
+        return new ObservableCollection<Incident>(result);
     }
-    
-    /* Commands */
-    public ICommand GoToDetailsCommand => new Command<Guid>(async (id) =>
-    {
-        // Redirect to the incident details page.
-        await Shell.Current.GoToAsync($"IncidentDetailsPage?id={id}");
-    });
 }
