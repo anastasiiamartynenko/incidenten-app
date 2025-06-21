@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:Incidenten.Mobile.Components"
+             x:Class="Incidenten.Mobile.Views.AllReportedIncidentsPage">
+    <ContentPage.Content>
+        <VerticalStackLayout>
+            <components:IncidentsCollection 
+                x:Name="IncidentList"
+                ShowActionButton="{Binding ShowActionButton}" 
+                PickUpCommand="{Binding PickUpCommand}"
+                CompleteCommand="{Binding CompleteCommand}" />
+        </VerticalStackLayout>
+    </ContentPage.Content>
+</ContentPage>

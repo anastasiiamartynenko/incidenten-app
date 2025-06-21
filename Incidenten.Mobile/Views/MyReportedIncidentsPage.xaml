@@ -2,47 +2,9 @@
 
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:components="clr-namespace:Incidenten.Mobile.Components"
              x:Class="Incidenten.Mobile.Views.MyReportedIncidentsPage">
-    <ContentPage.Content>
-        <CollectionView x:Name="MyReportedIncidentsCollectionView" ItemsSource="{Binding Incidents}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <Border Padding="10" Margin="5">
-                        <Border.GestureRecognizers>
-                            <TapGestureRecognizer 
-                                Command="{Binding BindingContext.GoToDetailsCommand, Source={x:Reference MyReportedIncidentsCollectionView}}"
-                                CommandParameter="{Binding Id}" />
-                        </Border.GestureRecognizers>
-                        
-                        <HorizontalStackLayout>
-                            <!-- First image associated with an incident -->
-                            <Image 
-                                Source="{Binding FirstImageUrlAndroid}" 
-                                WidthRequest="100"
-                                HeightRequest="100"
-                                Aspect="AspectFill"
-                                Margin="0,0,10,0" />
-                            
-                            <VerticalStackLayout>
-                                <!-- Name of the incident -->
-                                <Label Text="{Binding Name}" FontAttributes="Bold" />
-                                <!-- Description of the incident -->
-                                <Label Text="{Binding Description}" />
-                                <!-- Status of the incident -->
-                                <HorizontalStackLayout>
-                                    <Label Text="Status: " FontAttributes="Bold" />
-                                    <Label Text="{Binding Status}" />
-                                </HorizontalStackLayout>
-                                <!-- Priority of the incident -->
-                                <HorizontalStackLayout>
-                                    <Label Text="Priority: " FontAttributes="Bold"></Label>
-                                    <Label Text="{Binding Priority}" />
-                                </HorizontalStackLayout>
-                            </VerticalStackLayout>
-                        </HorizontalStackLayout>
-                    </Border>
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
-    </ContentPage.Content>
+    <components:IncidentsCollection 
+        x:Name="IncidentList" 
+        ShowActionButton="{Binding ShowActionButton}" />
 </ContentPage>

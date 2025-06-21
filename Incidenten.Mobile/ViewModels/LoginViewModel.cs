@@ -55,6 +55,13 @@ public class LoginViewModel : _BaseViewModel
             {
                 // Set token.
                 _authService.SetToken(result.Token);
+
+                var user = await _userApi.GetMe();
+                if (user != null)
+                {
+                    _authService.SetRole(user.Role);
+                }
+                
                 // Redirect to the home page.
                 await Shell.Current.GoToAsync("//MainPage");
             }

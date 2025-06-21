@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Incidenten.Mobile.Components.IncidentsCollection"
+             x:Name="Root">
+    <CollectionView 
+        x:Name="IncidentCollectionView">
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Border Padding="10" Margin="5">
+                    <Border.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Command="{Binding BindingContext.GoToDetailsCommand, Source={x:Reference IncidentCollectionView}}"
+                            CommandParameter="{Binding Id}" />
+                    </Border.GestureRecognizers>
+                    
+                    <HorizontalStackLayout>
+                        <!-- Image -->
+                        <Image 
+                            Source="{Binding FirstImageUrlAndroid}" 
+                            WidthRequest="100"
+                            HeightRequest="100"
+                            Aspect="AspectFill"
+                            Margin="0,0,10,0" />
+                        
+                        <!-- Incident brief data -->
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Name}" FontAttributes="Bold" />
+                            <Label Text="{Binding Description}" />
+                            
+                            <HorizontalStackLayout>
+                                <Label Text="Status: " FontAttributes="Bold" />
+                                <Label Text="{Binding Status}" />
+                            </HorizontalStackLayout>
+                            
+                            <HorizontalStackLayout>
+                                <Label Text="Priority: " FontAttributes="Bold" />
+                                <Label Text="{Binding Priority}" />
+                            </HorizontalStackLayout>
+                            
+                            <!-- Section for the action buttons -->
+                            <HorizontalStackLayout IsVisible="{Binding Source={x:Reference Root}, Path=ShowActionButton}">
+                                <Button Text="Pick up"
+                                        IsVisible="{Binding Status, Converter={StaticResource ShowPickUpConverter}}"
+                                        Command="{Binding Source={x:Reference Root}, Path=PickUpCommand}"
+                                        CommandParameter="{Binding}" />
+
+                                <Button Text="Complete"
+                                        IsVisible="{Binding Status, Converter={StaticResource ShowCompleteConverter}}"
+                                        Command="{Binding Source={x:Reference Root}, Path=CompleteCommand}"
+                                        CommandParameter="{Binding}" />
+                            </HorizontalStackLayout>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </Border>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+</ContentView>

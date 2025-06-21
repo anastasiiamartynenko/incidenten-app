@@ -5,12 +5,28 @@ using Microsoft.Maui.Maps;
 namespace Incidenten.Mobile.Views;
 
 [QueryProperty(nameof(IncidentId), "id")]
+[QueryProperty(nameof(ShowActionButtonString), "showAction")]
 public partial class IncidentDetailsPage : ContentPage
 {
     public IncidentDetailsPage(IncidentDetailsViewModel viewModel)
     {
         InitializeComponent();
         BindingContext = viewModel;
+    }
+    
+    private bool _showActionButton;
+
+    public string ShowActionButtonString
+    {
+        set
+        {
+            if (bool.TryParse(value, out var result))
+            {
+                _showActionButton = result;
+                if (BindingContext is IncidentDetailsViewModel viewModel)
+                    viewModel.ShowActionButton = _showActionButton;
+            }
+        }
     }
 
     public string IncidentId

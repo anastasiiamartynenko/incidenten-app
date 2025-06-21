@@ -58,10 +58,13 @@ public class UserViewModel : _BaseViewModel
         {
             // Load the user data and store it in the fields.
             var user = await _userApi.GetMe();
-            FullName = user.FullName;
-            Email = user.Email;
-            Role = user.Role;
-            ToggleNotificationsLabel = user.SendNotifications ? "Turn off" : "Turn on";
+            if (user != null)
+            {
+                FullName = user.FullName;
+                Email = user.Email;
+                Role = user.Role;
+                ToggleNotificationsLabel = user.SendNotifications ? "Turn off" : "Turn on";
+            }
         }
         catch (Exception ex)
         {

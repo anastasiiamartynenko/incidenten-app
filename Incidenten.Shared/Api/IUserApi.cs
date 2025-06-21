@@ -13,7 +13,7 @@ public interface IUserApi
     Task<LogInResponse> LogIn([Body] LogInRequest user);
 
     [Get("/user/me")]
-    Task<User> GetMe();
+    Task<User?> GetMe();
 
     [Put("/user/notifications")]
     Task ToggleNotifications();

@@ -11,4 +11,5 @@ public class UpdateIncidentRequest
 public class UpdateIncidentStatusRequest
 {
     public IncidentStatus Status { get; set; }
+    public IncidentPriority? Priority { get; set; }
 }
