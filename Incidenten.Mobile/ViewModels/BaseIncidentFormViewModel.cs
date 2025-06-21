@@ -11,14 +11,11 @@ namespace Incidenten.Mobile.ViewModels;
 
 public class BaseIncidentFormViewModel : _BaseViewModel, IMapAware
 {
-    private readonly IIncidentApi _incidentApi;
     protected readonly ImageHandler _imageHandler;
     protected readonly LocationHandler _locationHandler;
-    private readonly ValidationHelper _validationHelper = new ();
     
     public BaseIncidentFormViewModel(IIncidentApi incidentApi)
     {
-        _incidentApi = incidentApi;
         _imageHandler = new ImageHandler();
         _locationHandler = new LocationHandler();
         

@@ -3,14 +3,46 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:components="clr-namespace:Incidenten.Mobile.Components"
+             xmlns:maps="http://schemas.microsoft.com/dotnet/2021/maui/maps"
              x:Class="Incidenten.Mobile.Views.AllReportedIncidentsPage">
     <ContentPage.Content>
-        <VerticalStackLayout>
-            <components:IncidentsCollection 
+        <VerticalStackLayout Padding="40, 0, 40, 0" Spacing="15">
+            <Label Text="All incidents" FontSize="20" />
+
+            <!-- Filter by status -->
+            <Label Text="Filter by Status" FontAttributes="Bold" />
+            <Picker Title="Status" 
+                    ItemsSource="{Binding StatusOptions}" 
+                    SelectedItem="{Binding SelectedStatus}" />
+
+            <!-- Filter by priority -->
+            <Label Text="Filter by Priority" FontAttributes="Bold" />
+            <Picker Title="Priority" 
+                    ItemsSource="{Binding PriorityOptions}" 
+                    SelectedItem="{Binding SelectedPriority}" />
+            
+            <!-- View toggle button -->
+            <FlexLayout Direction="Row" AlignItems="Center" JustifyContent="Start" AlignContent="Center">
+                <Label Text="Map" />
+                <Switch IsToggled="{Binding IsListView}" />
+                <Label Text="List" />
+            </FlexLayout>
+            
+            <!-- List view -->
+            <components:IncidentsCollection
                 x:Name="IncidentList"
-                ShowActionButton="{Binding ShowActionButton}" 
+                IsVisible="{Binding IsListView}"
+                ShowActionButton="{Binding ShowActionButton}"
                 PickUpCommand="{Binding PickUpCommand}"
                 CompleteCommand="{Binding CompleteCommand}" />
+            
+            <!-- Map view -->
+            <maps:Map
+                x:Name="IncidentsMap"
+                IsVisible="{Binding IsMapView}"
+                HeightRequest="300"
+                MapType="Street"
+                IsShowingUser="True" />
         </VerticalStackLayout>
     </ContentPage.Content>
 </ContentPage>

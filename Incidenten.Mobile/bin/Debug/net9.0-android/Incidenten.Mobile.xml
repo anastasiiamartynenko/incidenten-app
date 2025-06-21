@@ -4,6 +4,9 @@
         <name>Incidenten.Mobile</name>
     </assembly>
     <members>
+        <member name="M:Incidenten.Mobile.Components.IncidentsCollection.SetItemsSource(System.Collections.Generic.IEnumerable{Incidenten.Domain.Incident})">
+            A helper function to set the items source
+        </member>
         <member name="M:Incidenten.Mobile.Services.ImageHelper.GetMimetype(System.String)">
             Get the image mimetype.
         </member>
@@ -34,11 +37,23 @@
         <member name="M:Incidenten.Mobile.Services.PermissionsService.IsLocationPermissionGranted">
             Check location permissions.
         </member>
+        <member name="M:Incidenten.Mobile.ViewModels.AllIncidentsViewModel.FetchIncidents(Incidenten.Shared.DTO.Incident.GetIncidentsFilter)">
+            Fetch all the incidents.
+        </member>
+        <member name="M:Incidenten.Mobile.ViewModels.AllIncidentsViewModel.PickUpIncident(Incidenten.Domain.Incident)">
+            Pick up an incident.
+        </member>
+        <member name="M:Incidenten.Mobile.ViewModels.AllIncidentsViewModel.CompleteIncident(Incidenten.Domain.Incident)">
+            Complete an incident.
+        </member>
         <member name="M:Incidenten.Mobile.ViewModels.BaseIncidentFormViewModel.UploadFromGallery">
             Exceptions-safe upload from gallery method.
         </member>
         <member name="M:Incidenten.Mobile.ViewModels.BaseIncidentFormViewModel.UploadFromCamera">
             Exceptions-safe upload from camera method.
+        </member>
+        <member name="M:Incidenten.Mobile.ViewModels.BaseIncidentsViewModel.LoadData(Incidenten.Shared.DTO.Incident.GetIncidentsFilter)">
+            Load the incidents.
         </member>
         <member name="M:Incidenten.Mobile.ViewModels.CreateIncidentViewModel.CreateIncident">
             Create an incident.
@@ -55,8 +70,20 @@
         <member name="M:Incidenten.Mobile.ViewModels.IncidentDetailsViewModel.LoadData(System.Guid)">
             Load incident data from the backend
         </member>
+        <member name="M:Incidenten.Mobile.ViewModels.IncidentDetailsViewModel.DeleteIncident">
+            Delete the incident.
+        </member>
+        <member name="M:Incidenten.Mobile.ViewModels.IncidentDetailsViewModel.PickUpIncident">
+            Pick up the incident.
+        </member>
+        <member name="M:Incidenten.Mobile.ViewModels.IncidentDetailsViewModel.CompleteIncident">
+            Complete the incident.
+        </member>
         <member name="M:Incidenten.Mobile.ViewModels.LoginViewModel.Login">
             Log in the user.
+        </member>
+        <member name="M:Incidenten.Mobile.ViewModels.MyReportedIncidentsViewModel.FetchIncidents(Incidenten.Shared.DTO.Incident.GetIncidentsFilter)">
+            Fetch my reported incidents.
         </member>
         <member name="M:Incidenten.Mobile.ViewModels.SignupViewModel.SignUp">
             Sign up the user.

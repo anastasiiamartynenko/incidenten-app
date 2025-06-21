@@ -2,6 +2,7 @@
 using System.Windows.Input;
 using Incidenten.Domain;
 using Incidenten.Shared.Api;
+using Incidenten.Shared.DTO.Incident;
 
 namespace Incidenten.Mobile.ViewModels;
 
@@ -22,18 +23,18 @@ public abstract class BaseIncidentsViewModel : _BaseViewModel
 
     
     /* Methods */
-    protected abstract Task<ObservableCollection<Incident>> FetchIncidents();
+    protected abstract Task<ObservableCollection<Incident>> FetchIncidents(GetIncidentsFilter? filters = null);
 
     /**
      * Load the incidents.
      */
-    public async Task LoadData()
+    public async Task LoadData(GetIncidentsFilter? filters = null)
     {
         Error = string.Empty;
 
         try
         {
-            var result = await FetchIncidents();
+            var result = await FetchIncidents(filters);
             Incidents.Clear();
             foreach (var incident in result)
             {
