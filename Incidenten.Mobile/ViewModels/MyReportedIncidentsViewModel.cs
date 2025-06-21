@@ -2,6 +2,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using Incidenten.Domain;
 using Incidenten.Shared.Api;
+using Incidenten.Shared.DTO.Incident;
 
 namespace Incidenten.Mobile.ViewModels;
 
@@ -19,7 +20,7 @@ public class MyReportedIncidentsViewModel : BaseIncidentsViewModel
     /**
      * Fetch my reported incidents.
      */
-    protected async override Task<ObservableCollection<Incident>> FetchIncidents()
+    protected override async Task<ObservableCollection<Incident>> FetchIncidents(GetIncidentsFilter? filters = null)
     {
         var result = await _incidentApi.GetMyReportedIncidents();
         return new ObservableCollection<Incident>(result);

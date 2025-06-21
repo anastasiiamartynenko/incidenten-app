@@ -25,7 +25,7 @@ public interface IIncidentApi
     Task<List<Incident>> GetMyAssignedIncidents();
     
     [Get("/incident/all")]
-    Task<List<Incident>> GetAllIncidents([Query] GetIncidentsFilter filter);
+    Task<List<Incident>> GetAllIncidents([Query] GetIncidentsFilter? filter);
 
     [Multipart]
     [Post("/incidentImage/{id}")]

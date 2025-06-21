@@ -254,7 +254,7 @@ public class IncidentController(IncidentenDbContext db, IConfiguration configura
             return Unauthorized();
         
         // Create the query.
-        var query = db.Incidents.AsQueryable();
+        var query = db.Incidents.Include(i => i.Location).AsQueryable();
         
         if (status.HasValue)
         {
