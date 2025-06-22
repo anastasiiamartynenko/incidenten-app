@@ -197,6 +197,10 @@
         "net9.0": {
           "targetAlias": "net9.0",
           "dependencies": {
+            "BlazorGoogleMaps": {
+              "target": "Package",
+              "version": "[4.13.0, )"
+            },
             "Blazored.LocalStorage": {
               "target": "Package",
               "version": "[4.5.0, )"

@@ -1,0 +1,203 @@
+﻿@page "/incidents/all"
+@using System.Collections.ObjectModel
+@using Incidenten.Domain.Enums
+@inject IIncidentApi IncidentApi
+@inject NavigationManager NavigationManager
+@using Color = MudBlazor.Color
+@using GoogleMapsComponents
+@using GoogleMapsComponents.Maps
+@using Incidenten.Web.Helpers
+@using Incidenten.Web.Components
+@inject IJSRuntime JS
+
+<MudPaper Class="pa-4" Elevation="0">
+    <MudText Typo="Typo.h4">All incidents</MudText>
+    
+    <!-- Filter chips -->
+    @if (selectedStatus != null)
+    {
+        <MudChip T="string" Color="Color.Primary">@selectedStatus</MudChip>
+    }
+    @if (selectedPriority != null)
+    {
+        <MudChip T="string" Color="Color.Secondary">@selectedPriority</MudChip>
+    }
+
+    <!-- Status filter -->
+    <MudSelect Clearable Variant="Variant.Outlined" @bind-Value="selectedStatus" Label="Filter by status">
+        @foreach (string status in _statusOptions)
+        {
+            <MudSelectItem Value="@status">@status</MudSelectItem>
+        }
+    </MudSelect>
+    
+    <!-- Priority filter -->
+    <MudSelect Clearable Variant="Variant.Outlined" @bind-Value="selectedPriority" Label="Filter by priority">
+        @foreach (string priority in _priorityOptions)
+        {
+            <MudSelectItem Value="@priority">@priority</MudSelectItem>
+        }
+    </MudSelect>
+    
+    <!-- View toggle section -->
+    <div class="d-flex align-items-center align-content-center">
+        <MudText class="mr-3">Map</MudText>
+        <MudSwitch @bind-Value="isListView" Color="Color.Primary" />
+        <MudText class="ml-3">List</MudText>
+    </div>
+    
+    @if (_incidents.Any())
+    {
+        <!-- List display -->
+        @if (isListView)
+        {
+            @foreach (var incident in _incidents)
+            {
+                <IncidentCard 
+                    Incident="incident"
+                    StatusOptions="_statusOptions"
+                    PriorityOptions="_priorityOptions" />
+            }
+        }
+    
+        <!-- Map display -->
+        @if (!isListView)
+        {
+            <div id="mapContainer" style="width: 100%; height: 200px;">
+                <AdvancedGoogleMap Options="@mapOptions">
+                    @foreach (var markerRef in Markers)
+                    {
+                        <MarkerComponent
+                            @key="markerRef.Id"
+                            Lat="@markerRef.Lat"
+                            Lng="@markerRef.Lng">
+                            <p>@markerRef.Title</p>
+                        </MarkerComponent>
+                    }
+                </AdvancedGoogleMap>
+            </div>
+        }
+    } 
+    @if (!_incidents.Any()) {
+        <MudText>No incidents found :(</MudText>
+    }
+</MudPaper>
+
+@code {
+    bool _isListView = true;
+
+    bool isListView
+    {
+        get => _isListView;
+        set
+        {
+            _isListView = !_isListView;
+            LoadData();
+        }
+    }
+    
+    ObservableCollection<Incident> _incidents = new ();
+    
+    string? _status;
+    string? selectedStatus
+    {
+        get => _status;
+        set
+        {
+            _status = value;
+            LoadData();
+
+        }
+    }
+
+    string? _priority;
+    string? selectedPriority
+    {
+        get => _priority;
+        set
+        {
+            _priority = value;
+            LoadData();
+        }
+    }
+
+    private readonly string[] _statusOptions = Enum.GetNames(typeof(IncidentStatus));
+    private readonly string[] _priorityOptions = Enum.GetNames(typeof(IncidentPriority));
+    
+    private async Task CenterMapOnUser()
+    {
+        try
+        {
+            var result = await JS.InvokeAsync<LatLngLiteral>("getUserLocation");
+            // mapOptions.Center = new LatLngLiteral(20.785655151474693, -156.26716453582048);
+            mapOptions.Center = result;
+            StateHasChanged();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Geolocation error: " + ex.Message);
+        }
+    }
+
+
+    private async Task LoadData()
+    {
+        try
+        {
+            GetIncidentsFilter filters = new ();
+            if (selectedStatus != null) filters.Status = Converter.StringToStatus(selectedStatus);
+            if (selectedPriority != null) filters.Priority = Converter.StringToPriority(selectedPriority);
+            
+            var result = await IncidentApi.GetAllIncidents(filters);
+            _incidents.Clear();
+            Markers.Clear();
+
+            var id = 1;
+            foreach (var incident in result)
+            {
+                _incidents.Add(incident);
+                if (!isListView) {}
+                if (incident.Location != null)
+                {
+                    Markers.Add(new MarkerData
+                    {
+                        Id = id,
+                        Lat = incident.Location.Latitude,
+                        Lng = incident.Location.Longitude,
+                        Title = incident.Name
+                    });
+                    
+                    ++id;
+                }
+            }
+            await CenterMapOnUser();
+            StateHasChanged();
+        }
+        catch
+        {
+            NavigationManager.NavigateTo("/log-in");
+        }
+    }
+
+    private List<MarkerData> Markers = [];
+    private MapOptions mapOptions = new ()
+    {
+        Zoom = 13,
+        MapId = "f7885315a88059c39ef02679",
+        Center = new LatLngLiteral(13.505892, 100.8162),
+        MapTypeId = MapTypeId.Roadmap
+    };	
+
+    public class MarkerData
+    {
+        public int Id { get; set; }
+        public double Lat { get; set; }
+        public double Lng { get; set; }
+        public string Title { get; set; } = string.Empty;
+    }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        await LoadData();
+    }
+}
