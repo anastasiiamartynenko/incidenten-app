@@ -44,6 +44,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSG9tZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
 
+[D:/c\#/IncidentenApp/Incidenten.Web/Pages/IncidentDetails.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5jaWRlbnREZXRhaWxzLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
 [D:/c\#/IncidentenApp/Incidenten.Web/Pages/IncidentsPage.razor]
 build_metadata.AdditionalFiles.TargetPath = UGFnZXNcSW5jaWRlbnRzUGFnZS5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 

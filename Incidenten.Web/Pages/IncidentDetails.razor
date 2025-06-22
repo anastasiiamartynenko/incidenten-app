@@ -1,0 +1,187 @@
+﻿@page "/incident/{Id}"
+@inject NavigationManager NavigationManager
+@using Incidenten.Domain.Enums
+@inject IIncidentApi IncidentApi
+@inject IIncidentStatusApi IncidentStatusApi
+@using Incidenten.Web.Helpers
+
+<MudCard Elevation="0" Outlined class="mb-3 pa-4">
+    @if (incident == null)
+    {
+        <MudText Typo="Typo.h4">Could not load an incident :(</MudText>
+    }
+    else
+    {
+        <MudText Typo="Typo.h4">@incident.Name</MudText>
+        <MudCarousel class="mud-full-width ma-3" Style="height: 400px;" AutoCycle="false" ShowArrows ShowBullets EnableSwipeGesture TData="object">
+            @foreach (var imgSrc in incident.Images)
+            {
+                <MudCarouselItem Transition="Transition.Slide" class="d-flex justify-content-center align-items-center align-content-center">
+                    <MudImage class="mx-auto my-auto" style="height: 400px; object-fit: cover;" Src="@imgSrc.ImageUrl.Trim()"/>
+                </MudCarouselItem>
+            }
+        </MudCarousel>
+        <MudText>@incident.Description</MudText>
+        
+        <div class="d-flex flex-row justify-content-between">
+            @if (incident.Status == IncidentStatus.Open)
+            {
+                <MudButton Color="Color.Error" Variant="Variant.Filled" StartIcon="@Icons.Material.Filled.Delete" class="px-4 ma-3" OnClick="async () => await Delete()">Delete</MudButton>
+            }
+            
+            <MudSelect Variant="Variant.Outlined"
+                       T="string"
+                       Value="@incidentPriority"
+                       class="pa-3"
+                       Label="Update priority"
+                       ValueChanged="OnPriorityChanged">
+                @foreach (string priority in PriorityOptions)
+                {
+                    <MudSelectItem Value="@priority">@priority</MudSelectItem>
+                }
+            </MudSelect>
+
+            <MudSelect Variant="Variant.Outlined"
+                       T="string"
+                       class="pa-3"
+                       Value="@incidentStatus"
+                       Label="Update status"
+                       ValueChanged="OnStatusChanged">
+                @foreach (string status in StatusOptions)
+                {
+                    <MudSelectItem Value="@status">@status</MudSelectItem>
+                }
+            </MudSelect>
+        </div>
+        
+        <MudText class="mt-3">
+            <strong>Status: </strong>
+            @incident.Status
+        </MudText>
+        <MudText>
+            <strong>Priority: </strong>
+            @incident.Priority
+        </MudText>
+        <MudText>
+            <strong>Reporter: </strong>
+            @incident.Reporter.Email (@incident.Reporter.FullName)
+        </MudText>
+        @if (incident.Executor != null)
+        {
+            <MudText>
+                <strong>Responsible employee: </strong>
+                @incident.Executor.Email (@incident.Executor.FullName)
+            </MudText>
+        }
+        <MudText>
+            <strong>Created at: </strong>
+            @incident.CreatedAt
+        </MudText>
+        <MudText>
+            <strong>Updated at: </strong>
+            @incident.UpdatedAt
+        </MudText>
+        @if (incident.DeadlineAt != null)
+        {
+            <MudText>
+                <strong>Deadline at: </strong>
+                @incident.DeadlineAt
+            </MudText>
+        }
+        @if (incident.CompletedAt != null)
+        {
+            <MudText>
+                <strong>Completed at: </strong>
+                @incident.CompletedAt
+            </MudText>
+        }
+    }
+</MudCard>
+
+@code {
+    [Parameter] public string Id { get; set; }
+    private readonly string[] StatusOptions = Enum.GetNames(typeof(IncidentStatus));
+    private readonly string[] PriorityOptions = Enum.GetNames(typeof(IncidentPriority));
+
+    private Incident? incident;
+    private string incidentStatus { get; set; } = string.Empty;
+    private string incidentPriority { get; set; } = string.Empty;
+
+    private async Task Delete()
+    {
+        try
+        {
+            if (incident == null) throw new Exception("Incident is null.");
+            await IncidentApi.DeleteIncident(incident.Id);
+            NavigationManager.NavigateTo("/incidents/all");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Failed to delete an incident: " + ex.Message);
+        }
+    }
+    
+    private async Task OnStatusChanged(string newValue)
+    {
+        try
+        {
+            if (incident == null) throw new Exception("Incident is null.");
+            var updateRequest = new UpdateIncidentStatusRequest
+            {
+                Status = Converter.StringToStatus(newValue),
+                Priority = null
+            };
+
+            await IncidentStatusApi.UpdateIncidentStatus(incident.Id, updateRequest);
+
+            incident.Status = Converter.StringToStatus(newValue) ?? incident.Status;
+            incidentStatus = newValue;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Failed to update status: " + ex.Message);
+        }
+    }
+    private async Task OnPriorityChanged(string newValue)
+    {
+        try
+        {
+            if (incident == null) throw new Exception("Incident is null.");
+            var updateRequest = new UpdateIncidentStatusRequest
+            {
+                Status = null,
+                Priority = Converter.StringToPriority(newValue)
+            };
+
+            await IncidentStatusApi.UpdateIncidentStatus(incident.Id, updateRequest);
+
+            incident.Priority = Converter.StringToPriority(newValue) ?? incident.Priority;
+            incidentPriority = newValue;
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Failed to update priority: " + ex.Message);
+        }
+    }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            if (Guid.TryParse(Id, out var parsed))
+            {
+                incident = await IncidentApi.GetIncident(parsed);
+            }
+            else
+            {
+                Console.WriteLine("Invalid GUID passed as Id.");
+            }
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("Failed to load an incident: " + ex.Message);
+        }
+    }
+
+}
