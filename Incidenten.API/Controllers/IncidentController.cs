@@ -385,7 +385,9 @@ public class IncidentController(IncidentenDbContext db, IConfiguration configura
         }
         
         // Update incident status if all the previous steps are successfully performed.
-        incident.Status = request.Status;
+        if (request.Status != null) incident.Status = (IncidentStatus) request.Status;
+        if (request.Priority != null && user.Role == UserRole.Official) 
+            incident.Priority = (IncidentPriority) request.Priority;
 
         // If the reporter is signed up to the notifications, make sure to send a notification to them.
         if (incident.Reporter.SendNotifications)

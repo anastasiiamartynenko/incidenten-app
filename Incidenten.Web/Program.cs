@@ -1,4 +1,5 @@
 using Blazored.LocalStorage;
+using GoogleMapsComponents;
 using Incidenten.Shared.Api;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -38,6 +39,11 @@ builder.Services.AddRefitClient<IUserApi>(settings)
 builder.Services.AddRefitClient<IIncidentApi>(settings)
     .ConfigureHttpClient(client => client.BaseAddress = new Uri(apiBaseUrl))
     .AddHttpMessageHandler<AuthTokenInjector>();
+builder.Services.AddRefitClient<IIncidentStatusApi>(settings)
+    .ConfigureHttpClient(client => client.BaseAddress = new Uri(apiBaseUrl))
+    .AddHttpMessageHandler<AuthTokenInjector>();
+
+builder.Services.AddBlazorGoogleMaps("AIzaSyAmk1oybe2SNzlwxcAjbRHSjcGzNugKASE");
 
 builder.Services.AddBlazoredLocalStorage();
 
