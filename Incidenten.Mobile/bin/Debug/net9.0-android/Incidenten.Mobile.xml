@@ -40,6 +40,18 @@
         <member name="M:Incidenten.Mobile.ViewModels.AllIncidentsViewModel.FetchIncidents(Incidenten.Shared.DTO.Incident.GetIncidentsFilter)">
             Fetch all the incidents.
         </member>
+        <member name="M:Incidenten.Mobile.ViewModels.AllIncidentsViewModel.StringToStatus(System.String)">
+            Returns the enum value of the status.
+        </member>
+        <member name="M:Incidenten.Mobile.ViewModels.AllIncidentsViewModel.StringToPriority(System.String)">
+            Returns the enum value of the priority.
+        </member>
+        <member name="M:Incidenten.Mobile.ViewModels.AllIncidentsViewModel.ApplyFilters">
+            Apply the filters and refresh the list of the incidents.
+        </member>
+        <member name="M:Incidenten.Mobile.ViewModels.AllIncidentsViewModel.LoadMapPins">
+            Load the map pins.
+        </member>
         <member name="M:Incidenten.Mobile.ViewModels.AllIncidentsViewModel.PickUpIncident(Incidenten.Domain.Incident)">
             Pick up an incident.
         </member>
