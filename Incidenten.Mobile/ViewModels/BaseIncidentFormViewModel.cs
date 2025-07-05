@@ -23,8 +23,8 @@ public class BaseIncidentFormViewModel : _BaseViewModel, IMapAware
         UploadFromCameraCommand = new Command(async () => await UploadFromCamera());
         MapClickedCommand = new Command<Location>(_locationHandler.UpdateLocation);
         
-        _locationHandler.LocationChanged += loc => LocationChanged?.Invoke(loc);
         Task.Run(() => _locationHandler.InitializeLocation());
+        _locationHandler.LocationChanged += loc => LocationChanged?.Invoke(loc);
     }
     
     /* Fields */
