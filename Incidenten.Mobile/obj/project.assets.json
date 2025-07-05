@@ -15679,7 +15679,7 @@
         }
       }
     },
-    "net9.0-ios18.4": {
+    "net9.0-ios18.5": {
       "Microsoft.Extensions.Configuration/9.0.0": {
         "type": "package",
         "dependencies": {
@@ -16275,7 +16275,7 @@
         }
       }
     },
-    "net9.0-ios18.4/android-arm64": {
+    "net9.0-ios18.5/android-arm64": {
       "Microsoft.Extensions.Configuration/9.0.0": {
         "type": "package",
         "dependencies": {
@@ -16871,7 +16871,7 @@
         }
       }
     },
-    "net9.0-ios18.4/android-x64": {
+    "net9.0-ios18.5/android-x64": {
       "Microsoft.Extensions.Configuration/9.0.0": {
         "type": "package",
         "dependencies": {
@@ -17467,7 +17467,7 @@
         }
       }
     },
-    "net9.0-ios18.4/iossimulator-x64": {
+    "net9.0-ios18.5/iossimulator-x64": {
       "Microsoft.Extensions.Configuration/9.0.0": {
         "type": "package",
         "dependencies": {
@@ -18063,7 +18063,7 @@
         }
       }
     },
-    "net9.0-ios18.4/maccatalyst-x64": {
+    "net9.0-ios18.5/maccatalyst-x64": {
       "Microsoft.Extensions.Configuration/9.0.0": {
         "type": "package",
         "dependencies": {
@@ -18659,7 +18659,7 @@
         }
       }
     },
-    "net9.0-ios18.4/win10-x64": {
+    "net9.0-ios18.5/win10-x64": {
       "Microsoft.Extensions.Configuration/9.0.0": {
         "type": "package",
         "dependencies": {
@@ -19255,7 +19255,7 @@
         }
       }
     },
-    "net9.0-maccatalyst18.4": {
+    "net9.0-maccatalyst18.5": {
       "Microsoft.Extensions.Configuration/9.0.0": {
         "type": "package",
         "dependencies": {
@@ -19851,7 +19851,7 @@
         }
       }
     },
-    "net9.0-maccatalyst18.4/android-arm64": {
+    "net9.0-maccatalyst18.5/android-arm64": {
       "Microsoft.Extensions.Configuration/9.0.0": {
         "type": "package",
         "dependencies": {
@@ -20447,7 +20447,7 @@
         }
       }
     },
-    "net9.0-maccatalyst18.4/android-x64": {
+    "net9.0-maccatalyst18.5/android-x64": {
       "Microsoft.Extensions.Configuration/9.0.0": {
         "type": "package",
         "dependencies": {
@@ -21043,7 +21043,7 @@
         }
       }
     },
-    "net9.0-maccatalyst18.4/iossimulator-x64": {
+    "net9.0-maccatalyst18.5/iossimulator-x64": {
       "Microsoft.Extensions.Configuration/9.0.0": {
         "type": "package",
         "dependencies": {
@@ -21639,7 +21639,7 @@
         }
       }
     },
-    "net9.0-maccatalyst18.4/maccatalyst-x64": {
+    "net9.0-maccatalyst18.5/maccatalyst-x64": {
       "Microsoft.Extensions.Configuration/9.0.0": {
         "type": "package",
         "dependencies": {
@@ -22235,7 +22235,7 @@
         }
       }
     },
-    "net9.0-maccatalyst18.4/win10-x64": {
+    "net9.0-maccatalyst18.5/win10-x64": {
       "Microsoft.Extensions.Configuration/9.0.0": {
         "type": "package",
         "dependencies": {
@@ -31881,7 +31881,7 @@
       "Refit >= 8.0.0",
       "Refit.HttpClientFactory >= 8.0.0"
     ],
-    "net9.0-ios18.4": [
+    "net9.0-ios18.5": [
       "Incidenten.Shared >= 1.0.0",
       "Microsoft.Extensions.Logging.Debug >= 9.0.0",
       "Microsoft.Maui.Controls >= 9.0.51",
@@ -31890,7 +31890,7 @@
       "Refit >= 8.0.0",
       "Refit.HttpClientFactory >= 8.0.0"
     ],
-    "net9.0-maccatalyst18.4": [
+    "net9.0-maccatalyst18.5": [
       "Incidenten.Shared >= 1.0.0",
       "Microsoft.Extensions.Logging.Debug >= 9.0.0",
       "Microsoft.Maui.Controls >= 9.0.51",
@@ -31950,7 +31950,7 @@
             }
           }
         },
-        "net9.0-ios18.4": {
+        "net9.0-ios18.5": {
           "targetAlias": "net9.0-ios",
           "projectReferences": {
             "D:\\c#\\IncidentenApp\\Incidenten.Shared\\Incidenten.Shared.csproj": {
@@ -31958,7 +31958,7 @@
             }
           }
         },
-        "net9.0-maccatalyst18.4": {
+        "net9.0-maccatalyst18.5": {
           "targetAlias": "net9.0-maccatalyst",
           "projectReferences": {
             "D:\\c#\\IncidentenApp\\Incidenten.Shared\\Incidenten.Shared.csproj": {
@@ -32032,7 +32032,7 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.NETCore.App.Ref",
-            "version": "[9.0.5, 9.0.5]"
+            "version": "[9.0.6, 9.0.6]"
           }
         ],
         "frameworkReferences": {
@@ -32045,7 +32045,7 @@
         },
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300-preview.0.25177.5/PortableRuntimeIdentifierGraph.json"
       },
-      "net9.0-ios18.4": {
+      "net9.0-ios18.5": {
         "targetAlias": "net9.0-ios",
         "dependencies": {
           "Microsoft.Extensions.Logging.Debug": {
@@ -32089,7 +32089,7 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.NETCore.App.Ref",
-            "version": "[9.0.5, 9.0.5]"
+            "version": "[9.0.6, 9.0.6]"
           }
         ],
         "frameworkReferences": {
@@ -32102,7 +32102,7 @@
         },
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.300-preview.0.25177.5/PortableRuntimeIdentifierGraph.json"
       },
-      "net9.0-maccatalyst18.4": {
+      "net9.0-maccatalyst18.5": {
         "targetAlias": "net9.0-maccatalyst",
         "dependencies": {
           "Microsoft.Extensions.Logging.Debug": {
@@ -32147,7 +32147,7 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.NETCore.App.Ref",
-            "version": "[9.0.5, 9.0.5]"
+            "version": "[9.0.6, 9.0.6]"
           }
         ],
         "frameworkReferences": {

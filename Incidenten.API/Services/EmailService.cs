@@ -1,17 +1,24 @@
 ﻿using Incidenten.API.Interfaces;
 using Incidenten.Domain;
+using Incidenten.Infrastructures;
 using MailKit.Net.Smtp;
+using Microsoft.EntityFrameworkCore;
 using MimeKit;
 
 public class EmailService : IEmailService
 {
+    private readonly IncidentenDbContext _db;
     private readonly string host = string.Empty;
     private readonly int port = 587;
     private readonly string username = string.Empty;
     private readonly string password = string.Empty;
+    private readonly string _updateStatusTemplateName;
 
-    public EmailService(IConfiguration config)
+    public EmailService(IncidentenDbContext db, IConfiguration config)
     {
+        _db = db;
+        _updateStatusTemplateName = config["Email:UpdateStatusTemplateName"] ?? throw new Exception("Email template \"Update status\" not found.");
+        
         var emailNode = config.GetSection("Email");
 
         if (emailNode.Exists())
@@ -21,6 +28,11 @@ public class EmailService : IEmailService
             username = emailNode.GetValue<string>("Username") ?? string.Empty;
             password = emailNode.GetValue<string>("Password") ?? string.Empty;
         }
+    }
+    
+    public async Task<EmailTemplate?> GetUpdateStatusTemplate()
+    {
+        return  await _db.EmailTemplates.FirstOrDefaultAsync(t => t.Name == _updateStatusTemplateName);
     }
     
     private string ReplacePlaceholders(string initialString, Dictionary<string, string> placeholders)

@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "3/a7XzPOvi0=",
+  "dgSpecHash": "NIAFRCYlPU0=",
   "success": true,
   "projectFilePath": "D:\\c#\\IncidentenApp\\Incidenten.Web\\Incidenten.Web.csproj",
   "expectedPackageFiles": [
@@ -50,7 +50,7 @@
     "C:\\Users\\User\\.nuget\\packages\\microsoft.jsinterop\\9.0.5\\microsoft.jsinterop.9.0.5.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.jsinterop.webassembly\\9.0.3\\microsoft.jsinterop.webassembly.9.0.3.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.net.illink.tasks\\9.0.3\\microsoft.net.illink.tasks.9.0.3.nupkg.sha512",
-    "C:\\Users\\User\\.nuget\\packages\\microsoft.net.sdk.webassembly.pack\\9.0.5\\microsoft.net.sdk.webassembly.pack.9.0.5.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.net.sdk.webassembly.pack\\9.0.6\\microsoft.net.sdk.webassembly.pack.9.0.6.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\microsoft.netcore.platforms\\2.1.2\\microsoft.netcore.platforms.2.1.2.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\mudblazor\\8.6.0\\mudblazor.8.6.0.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\mudblazor.extensions\\8.6.1\\mudblazor.extensions.8.6.1.nupkg.sha512",
@@ -77,8 +77,8 @@
     "C:\\Users\\User\\.nuget\\packages\\xmpcore\\6.1.10.1\\xmpcore.6.1.10.1.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\yamldotnet\\13.3.1\\yamldotnet.13.3.1.nupkg.sha512",
     "C:\\Users\\User\\.nuget\\packages\\zstdsharp.port\\0.8.4\\zstdsharp.port.0.8.4.nupkg.sha512",
-    "C:\\Users\\User\\.nuget\\packages\\microsoft.netcore.app.ref\\9.0.5\\microsoft.netcore.app.ref.9.0.5.nupkg.sha512",
-    "C:\\Users\\User\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\9.0.5\\microsoft.netcore.app.runtime.mono.browser-wasm.9.0.5.nupkg.sha512"
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.netcore.app.ref\\9.0.6\\microsoft.netcore.app.ref.9.0.6.nupkg.sha512",
+    "C:\\Users\\User\\.nuget\\packages\\microsoft.netcore.app.runtime.mono.browser-wasm\\9.0.6\\microsoft.netcore.app.runtime.mono.browser-wasm.9.0.6.nupkg.sha512"
   ],
   "logs": []
 }
