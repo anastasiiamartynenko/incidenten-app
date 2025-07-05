@@ -1,4 +1,5 @@
 using System.Text;
+using Incidenten.API.Services;
 using Incidenten.Infrastructures;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
@@ -14,6 +15,10 @@ builder.Services.AddDbContext<IncidentenDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("Default")));
 
 builder.Services.AddScoped<EmailService>();
+builder.Services.AddScoped<IncidentService>();
+builder.Services.AddScoped<IncidentImageService>();
+builder.Services.AddScoped<IncidentLocationService>();
+builder.Services.AddScoped<UserService>();
 
 builder.Services.AddControllers();
 
